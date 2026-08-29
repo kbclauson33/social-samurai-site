@@ -1,0 +1,598 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Social Samurai</title>
+<meta name="description" content="Social Samurai is a live game night for work teams — one big screen, every phone a controller. Book a night for $299, or run it yourself all year.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Shippori+Mincho:wght@500;600;700;800&family=IBM+Plex+Sans:wght@400;500;600;700&family=IBM+Plex+Mono:wght@400;500;600&display=swap">
+<style>
+  :root{
+    color-scheme:light;
+    --paper:#F1EDE3;        /* washi */
+    --paper-raise:#F9F6EE;
+    --paper-sunk:#E6E1D3;
+    --ink:#1B1B22;          /* sumi */
+    --ink-2:#4C4B55;
+    --ink-3:#807E87;
+    --rule:#D5D0C2;
+    --rule-hard:#B7B1A1;
+    --seal:#B4232C;         /* hanko vermillion */
+    --seal-hi:#C93A3C;
+    --seal-soft:rgba(180,35,44,.09);
+    --gold:#9A7B34;
+    --shadow:rgba(27,27,34,.12);
+    --stage:#14141A;        /* the big-screen band stays dark in both themes */
+    --stage-ink:#EDE9DE;
+    --stage-rule:#2C2C36;
+  }
+  @media (prefers-color-scheme:dark){
+    :root:not([data-theme="light"]){
+      color-scheme:dark;
+      --paper:#131318;
+      --paper-raise:#1B1B22;
+      --paper-sunk:#0E0E12;
+      --ink:#EAE6DB;
+      --ink-2:#A9A6B0;
+      --ink-3:#7B7983;
+      --rule:#2A2A33;
+      --rule-hard:#3B3B46;
+      --seal:#E0575E;
+      --seal-hi:#E9767B;
+      --seal-soft:rgba(224,87,94,.12);
+      --gold:#C6A45C;
+      --shadow:rgba(0,0,0,.5);
+      --stage:#0E0E12;
+      --stage-ink:#EAE6DB;
+      --stage-rule:#26262e;
+    }
+  }
+  :root[data-theme="dark"]{
+    color-scheme:dark;
+    --paper:#131318;
+    --paper-raise:#1B1B22;
+    --paper-sunk:#0E0E12;
+    --ink:#EAE6DB;
+    --ink-2:#A9A6B0;
+    --ink-3:#7B7983;
+    --rule:#2A2A33;
+    --rule-hard:#3B3B46;
+    --seal:#E0575E;
+    --seal-hi:#E9767B;
+    --seal-soft:rgba(224,87,94,.12);
+    --gold:#C6A45C;
+    --shadow:rgba(0,0,0,.5);
+    --stage:#0E0E12;
+    --stage-ink:#EAE6DB;
+    --stage-rule:#26262e;
+  }
+
+  *{box-sizing:border-box}
+  html{scroll-behavior:smooth}
+  body{
+    margin:0;background:var(--paper);color:var(--ink);
+    font-family:"IBM Plex Sans",-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif;
+    font-size:16px;line-height:1.6;
+    -webkit-font-smoothing:antialiased;
+  }
+  a{color:inherit}
+  ::selection{background:var(--seal);color:#fff}
+
+  .wrap{max-width:1060px;margin:0 auto;padding:0 24px}
+  .mono{font-family:"IBM Plex Mono",monospace}
+
+  /* ---------- nav ---------- */
+  nav{
+    position:sticky;top:0;z-index:50;
+    background:color-mix(in srgb, var(--paper) 88%, transparent);
+    backdrop-filter:blur(10px);-webkit-backdrop-filter:blur(10px);
+    border-bottom:1px solid var(--rule);
+  }
+  .nav-in{display:flex;align-items:center;gap:26px;padding:14px 24px;max-width:1060px;margin:0 auto}
+  .brand{display:flex;align-items:center;gap:10px;text-decoration:none;font-weight:700;letter-spacing:.02em}
+  .brand .seal-mark{
+    width:30px;height:30px;border-radius:6px;background:var(--seal);color:#fff;
+    display:grid;place-items:center;font-family:"Shippori Mincho",serif;font-size:17px;font-weight:700;
+    box-shadow:0 2px 8px var(--shadow);
+  }
+  .nav-links{display:flex;gap:22px;margin-left:auto;align-items:center}
+  .nav-links a{
+    text-decoration:none;font-size:14px;font-weight:500;color:var(--ink-2);
+  }
+  .nav-links a:hover{color:var(--ink)}
+  .nav-cta{
+    background:var(--seal);color:#fff !important;padding:8px 16px;border-radius:4px;
+    font-weight:600;
+  }
+  .nav-cta:hover{background:var(--seal-hi)}
+  @media (max-width:720px){ .nav-links a:not(.nav-cta){display:none} }
+
+  /* ---------- hero ---------- */
+  header.hero{padding:84px 0 70px;position:relative;overflow:hidden}
+  .hero-grid{display:grid;grid-template-columns:1.15fr .85fr;gap:48px;align-items:center}
+  .kicker{
+    font-family:"IBM Plex Mono",monospace;font-size:12px;letter-spacing:.22em;
+    text-transform:uppercase;color:var(--seal);margin:0 0 18px;font-weight:600;
+  }
+  h1{
+    font-family:"Shippori Mincho",Georgia,serif;font-weight:800;
+    font-size:clamp(40px,6vw,64px);line-height:1.06;margin:0 0 22px;
+    letter-spacing:-.01em;text-wrap:balance;
+  }
+  .standfirst{font-size:19px;color:var(--ink-2);max-width:46ch;margin:0 0 32px}
+  .cta-row{display:flex;gap:14px;flex-wrap:wrap;align-items:center}
+  .btn{
+    display:inline-block;text-decoration:none;font-weight:600;font-size:15.5px;
+    padding:14px 26px;border-radius:4px;border:1px solid transparent;cursor:pointer;
+    font-family:inherit;
+  }
+  .btn-seal{background:var(--seal);color:#fff}
+  .btn-seal:hover{background:var(--seal-hi)}
+  .btn-ghost{border-color:var(--rule-hard);color:var(--ink)}
+  .btn-ghost:hover{border-color:var(--ink)}
+  .btn:focus-visible,a:focus-visible,button:focus-visible{outline:2px solid var(--seal);outline-offset:2px}
+  .cta-note{font-size:13px;color:var(--ink-3);width:100%;margin-top:4px}
+
+  /* the crest — drawn like the game draws them */
+  .crest-box{display:grid;place-items:center}
+  .crest-box svg{width:min(320px,70vw);height:auto;filter:drop-shadow(0 18px 34px var(--shadow))}
+
+  /* giant faint 侍 behind hero */
+  .kanji-ghost{
+    position:absolute;right:-40px;top:-60px;
+    font-family:"Shippori Mincho",serif;font-size:420px;line-height:1;
+    color:var(--ink);opacity:.035;pointer-events:none;user-select:none;
+  }
+  @media (max-width:860px){
+    .hero-grid{grid-template-columns:1fr}
+    .crest-box{order:-1}
+    .crest-box svg{width:180px}
+    header.hero{padding:48px 0 56px}
+  }
+
+  /* ---------- section scaffolding ---------- */
+  section{padding:72px 0;border-top:1px solid var(--rule)}
+  .sec-label{
+    font-family:"IBM Plex Mono",monospace;font-size:11.5px;font-weight:600;
+    letter-spacing:.22em;text-transform:uppercase;color:var(--seal);display:block;margin-bottom:12px;
+  }
+  h2{
+    font-family:"Shippori Mincho",Georgia,serif;font-weight:700;
+    font-size:clamp(28px,3.6vw,38px);line-height:1.15;margin:0 0 18px;text-wrap:balance;
+  }
+  .measure{max-width:64ch;color:var(--ink-2);font-size:16.5px}
+
+  /* ---------- stage band (how it works) ---------- */
+  .stage-band{
+    background:var(--stage);color:var(--stage-ink);
+    border-top:1px solid var(--stage-rule);
+  }
+  .stage-band .sec-label{color:var(--seal-hi)}
+  .stage-band .measure{color:color-mix(in srgb, var(--stage-ink) 72%, transparent)}
+  .steps{display:grid;grid-template-columns:repeat(3,1fr);gap:28px;margin-top:44px}
+  .step{border-top:2px solid var(--seal);padding-top:18px}
+  .step .n{
+    font-family:"Shippori Mincho",serif;font-size:15px;color:var(--seal-hi);
+    letter-spacing:.3em;margin-bottom:10px;font-weight:600;
+  }
+  .step h3{font-size:18px;margin:0 0 8px;font-weight:600}
+  .step p{margin:0;font-size:14.5px;color:color-mix(in srgb, var(--stage-ink) 68%, transparent)}
+  .room-chip{
+    display:inline-block;margin-top:14px;padding:6px 14px;border:1px dashed var(--stage-rule);
+    border-radius:4px;font-family:"IBM Plex Mono",monospace;font-size:15px;letter-spacing:.4em;
+    color:var(--stage-ink);
+  }
+  @media (max-width:760px){ .steps{grid-template-columns:1fr} }
+
+  /* ---------- features ---------- */
+  .feat-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:1px;background:var(--rule);border:1px solid var(--rule);margin-top:40px}
+  .feat{background:var(--paper-raise);padding:28px 26px}
+  .feat h3{font-size:17px;margin:0 0 8px;font-weight:600;display:flex;align-items:center;gap:10px}
+  .feat h3 .tick{color:var(--seal);font-family:"Shippori Mincho",serif}
+  .feat p{margin:0;font-size:14.5px;color:var(--ink-2)}
+  @media (max-width:700px){ .feat-grid{grid-template-columns:1fr} }
+
+  /* ---------- pricing ---------- */
+  .tiers{display:grid;grid-template-columns:repeat(4,1fr);gap:18px;margin-top:44px;align-items:stretch}
+  .tier{
+    background:var(--paper-raise);border:1px solid var(--rule);border-radius:6px;
+    padding:26px 22px;display:flex;flex-direction:column;gap:0;
+  }
+  .tier.mark{border-color:var(--seal);position:relative;box-shadow:0 16px 40px -18px var(--shadow)}
+  .tier .flag{
+    position:absolute;top:-11px;left:20px;background:var(--seal);color:#fff;
+    font-family:"IBM Plex Mono",monospace;font-size:10px;font-weight:600;letter-spacing:.18em;
+    text-transform:uppercase;padding:3px 10px;border-radius:3px;
+  }
+  .tier h3{font-family:"Shippori Mincho",serif;font-size:20px;margin:0 0 2px;font-weight:700}
+  .tier .who{font-size:12.5px;color:var(--ink-3);margin:0 0 18px;min-height:34px}
+  .tier .price{font-size:32px;font-weight:700;letter-spacing:-.02em;font-variant-numeric:tabular-nums}
+  .tier .per{font-size:13px;color:var(--ink-3);margin-bottom:18px}
+  .tier ul{list-style:none;margin:0 0 24px;padding:0;font-size:13.5px;color:var(--ink-2);flex:1}
+  .tier ul li{padding:5px 0 5px 20px;position:relative}
+  .tier ul li::before{content:"—";position:absolute;left:0;color:var(--seal)}
+  .tier .btn{text-align:center;width:100%;font-size:14px;padding:11px 0}
+  @media (max-width:920px){ .tiers{grid-template-columns:repeat(2,1fr)} }
+  @media (max-width:560px){ .tiers{grid-template-columns:1fr} }
+  .price-note{margin-top:22px;font-size:13px;color:var(--ink-3);max-width:64ch}
+
+  /* ---------- versus ---------- */
+  .vs{display:grid;grid-template-columns:1fr 1fr;gap:1px;background:var(--rule);border:1px solid var(--rule);margin-top:40px}
+  .vs > div{background:var(--paper-raise);padding:30px 28px}
+  .vs .them h3, .vs .us h3{font-family:"Shippori Mincho",serif;font-size:19px;margin:0 0 14px;font-weight:700}
+  .vs ul{list-style:none;margin:0;padding:0;font-size:14.5px;color:var(--ink-2)}
+  .vs ul li{padding:7px 0 7px 24px;position:relative;border-bottom:1px solid var(--rule)}
+  .vs ul li:last-child{border-bottom:none}
+  .vs .them li::before{content:"×";position:absolute;left:2px;color:var(--ink-3);font-weight:600}
+  .vs .us li::before{content:"◦";position:absolute;left:2px;color:var(--seal);font-weight:700}
+  .vs .us{border-left:2px solid var(--seal)}
+  @media (max-width:700px){ .vs{grid-template-columns:1fr} .vs .us{border-left:none;border-top:2px solid var(--seal)} }
+
+  /* ---------- faq ---------- */
+  .faq{max-width:720px;margin-top:34px}
+  .faq details{border-bottom:1px solid var(--rule);padding:4px 0}
+  .faq summary{
+    cursor:pointer;font-weight:600;font-size:16px;padding:14px 0;list-style:none;
+    display:flex;justify-content:space-between;align-items:center;gap:16px;
+  }
+  .faq summary::-webkit-details-marker{display:none}
+  .faq summary::after{content:"+";font-family:"IBM Plex Mono",monospace;color:var(--seal);font-size:18px;flex:none}
+  .faq details[open] summary::after{content:"–"}
+  .faq .a{padding:0 0 18px;font-size:15px;color:var(--ink-2);max-width:60ch}
+
+  /* ---------- final cta ---------- */
+  .final{
+    text-align:center;padding:90px 0;
+  }
+  .final .seal-stamp{
+    width:64px;height:64px;border-radius:10px;background:var(--seal);color:#fff;margin:0 auto 26px;
+    display:grid;place-items:center;font-family:"Shippori Mincho",serif;font-size:34px;font-weight:700;
+    box-shadow:0 10px 30px var(--shadow);transform:rotate(-3deg);
+  }
+  .final h2{margin-bottom:14px}
+  .final p{color:var(--ink-2);margin:0 0 30px}
+
+  /* ---------- footer ---------- */
+  footer{
+    border-top:2px solid var(--ink);padding:34px 0 60px;
+    font-size:13px;color:var(--ink-3);
+  }
+  .foot-in{display:flex;flex-wrap:wrap;gap:18px 34px;align-items:center}
+  footer a{color:var(--ink-2);text-decoration:none}
+  footer a:hover{text-decoration:underline}
+  .foot-brand{font-family:"IBM Plex Mono",monospace;letter-spacing:.08em;margin-right:auto}
+
+  /* ---------- checkout dialog ---------- */
+  dialog#buy{
+    border:1px solid var(--rule-hard);border-radius:8px;background:var(--paper-raise);color:var(--ink);
+    padding:0;max-width:430px;width:calc(100vw - 40px);box-shadow:0 30px 80px var(--shadow);
+  }
+  dialog#buy::backdrop{background:rgba(10,10,14,.55)}
+  .buy-in{padding:30px 30px 26px}
+  .buy-in h3{font-family:"Shippori Mincho",serif;margin:0 0 4px;font-size:22px}
+  .buy-in .tierline{font-family:"IBM Plex Mono",monospace;font-size:13px;color:var(--seal);margin:0 0 16px}
+  .buy-in p{font-size:14.5px;color:var(--ink-2);margin:0 0 20px}
+  .buy-in .row{display:flex;gap:10px;flex-wrap:wrap}
+  .buy-close{background:none;border:none;color:var(--ink-3);font-size:13px;cursor:pointer;margin-top:14px;font-family:inherit}
+
+  .banner{
+    background:var(--seal);color:#fff;text-align:center;padding:10px 18px;font-size:14px;font-weight:500;
+    display:none;
+  }
+  .banner.show{display:block}
+
+  @media (prefers-reduced-motion:reduce){ *{animation:none!important;transition:none!important} html{scroll-behavior:auto} }
+</style>
+</head>
+<body>
+
+<div class="banner" id="thanks">You're booked in spirit — payment received. We'll email you within one business day to set up your night. 🥷</div>
+
+<nav>
+  <div class="nav-in">
+    <a class="brand" href="#top">
+      <span class="seal-mark">侍</span>
+      <span>Social Samurai</span>
+    </a>
+    <div class="nav-links">
+      <a href="#how">How it works</a>
+      <a href="#pricing">Pricing</a>
+      <a href="#companies">For companies</a>
+      <a href="#faq">FAQ</a>
+      <a class="nav-cta" href="#pricing">Book a night</a>
+    </div>
+  </div>
+</nav>
+
+<header class="hero" id="top">
+  <div class="kanji-ghost" aria-hidden="true">侍</div>
+  <div class="wrap hero-grid">
+    <div>
+      <p class="kicker">Live team game · 8–30 players · 45 minutes</p>
+      <h1>The game night your team actually talks about on Monday.</h1>
+      <p class="standfirst">One big screen. Every phone becomes a controller. A sensei runs seven rounds where your team writes, bluffs, and guesses who-wrote-what — and nobody gets to sit out.</p>
+      <div class="cta-row">
+        <button class="btn btn-seal" data-buy="event">Book a night — $299</button>
+        <a class="btn btn-ghost" href="#how">See how it works</a>
+        <span class="cta-note">No app to install. Works on any phone browser and any screen you can cast to.</span>
+      </div>
+    </div>
+    <div class="crest-box" aria-hidden="true">
+      <!-- procedural-style crest, in the spirit of the in-game crests -->
+      <svg viewBox="0 0 200 200" role="img" aria-label="Social Samurai crest">
+        <circle cx="100" cy="100" r="92" fill="none" stroke="var(--seal)" stroke-width="3"/>
+        <circle cx="100" cy="100" r="80" fill="none" stroke="var(--seal)" stroke-width="1" opacity=".5"/>
+        <g stroke="var(--seal)" stroke-width="3" fill="none">
+          <path d="M100 34 L100 166"/>
+          <path d="M56 60 L144 140"/>
+          <path d="M144 60 L56 140"/>
+        </g>
+        <circle cx="100" cy="100" r="34" fill="var(--seal)"/>
+        <text x="100" y="113" text-anchor="middle" font-family="Shippori Mincho, serif" font-size="38" font-weight="700" fill="var(--paper-raise)">侍</text>
+        <circle cx="100" cy="34" r="6" fill="var(--seal)"/>
+        <circle cx="100" cy="166" r="6" fill="var(--seal)"/>
+        <circle cx="56" cy="60" r="4.5" fill="var(--seal)"/>
+        <circle cx="144" cy="140" r="4.5" fill="var(--seal)"/>
+        <circle cx="144" cy="60" r="4.5" fill="var(--seal)"/>
+        <circle cx="56" cy="140" r="4.5" fill="var(--seal)"/>
+      </svg>
+    </div>
+  </div>
+</header>
+
+<section class="stage-band" id="how">
+  <div class="wrap">
+    <span class="sec-label">How a night works</span>
+    <h2>Cast it. Join it. Draw swords.</h2>
+    <p class="measure">Social Samurai runs like a game show, not a meeting. The big screen is the stage; everyone's phone is their sword. No downloads, no accounts for players, no one reading instructions aloud for ten minutes.</p>
+    <div class="steps">
+      <div class="step">
+        <div class="n">一 · ONE</div>
+        <h3>Put the stage on the big screen</h3>
+        <p>Open the game on a laptop and cast it to the TV or projector — office, offsite, or a shared screen on the video call.</p>
+      </div>
+      <div class="step">
+        <div class="n">二 · TWO</div>
+        <h3>Everyone joins with a room code</h3>
+        <p>Players open a link on their phone and type the code on screen. Eight to thirty players, in the room or remote.</p>
+        <span class="room-chip">KATANA</span>
+      </div>
+      <div class="step">
+        <div class="n">三 · THREE</div>
+        <h3>The sensei runs seven rounds</h3>
+        <p>Everyone answers upfront — then the game reveals answers one by one while the room bluffs, accuses, and guesses who wrote what. Concealment scoring means hiding well earns points too, so nobody checks out.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section>
+  <div class="wrap">
+    <span class="sec-label">Why it lands</span>
+    <h2>Built to make coworkers interesting to each other.</h2>
+    <div class="feat-grid">
+      <div class="feat">
+        <h3><span class="tick">◦</span>Nobody sits out</h3>
+        <p>Concealment scoring rewards you for not being guessed, so quiet people score as hard as loud ones. Writing happens upfront, so there's no dead air mid-game.</p>
+      </div>
+      <div class="feat">
+        <h3><span class="tick">◦</span>Zero setup for players</h3>
+        <p>Phones join through the browser with a room code. No app store, no accounts, no IT ticket.</p>
+      </div>
+      <div class="feat">
+        <h3><span class="tick">◦</span>Production value included</h3>
+        <p>An opening title sequence, a live score stage, procedurally drawn player crests and an original score generated in real time. It feels like an event, because it is one.</p>
+      </div>
+      <div class="feat">
+        <h3><span class="tick">◦</span>Questions that do the work</h3>
+        <p>A curated bank of 80 prompts tuned for coworkers — revealing without being risky. On the Company plan, write your own: inside jokes are the whole point.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="pricing">
+  <div class="wrap">
+    <span class="sec-label">Pricing</span>
+    <h2>Costs less than the agency. Nobody has to schedule a stranger.</h2>
+    <p class="measure">A hosted team-building session runs about $320 for ten people, books weeks out, and puts a stranger on your call. Social Samurai is yours the same afternoon.</p>
+
+    <div class="tiers">
+      <div class="tier">
+        <h3>Single Event</h3>
+        <p class="who">"We need something for Thursday."</p>
+        <div class="price">$299</div>
+        <div class="per">one night</div>
+        <ul>
+          <li>One game night, up to 30 players</li>
+          <li>Full game, all rounds</li>
+          <li>Ready the same afternoon</li>
+        </ul>
+        <button class="btn btn-seal" data-buy="event">Book a night</button>
+      </div>
+
+      <div class="tier">
+        <h3>Team</h3>
+        <p class="who">One team lead, plays quarterly or more.</p>
+        <div class="price">$900</div>
+        <div class="per">per year</div>
+        <ul>
+          <li>One sensei seat</li>
+          <li>Unlimited game nights</li>
+          <li>Up to 15 players per game</li>
+        </ul>
+        <button class="btn btn-seal" data-buy="team">Start a team</button>
+      </div>
+
+      <div class="tier mark">
+        <span class="flag">Most companies</span>
+        <h3>Company</h3>
+        <p class="who">People Ops, running it across many teams.</p>
+        <div class="price">$4,800</div>
+        <div class="per">per year</div>
+        <ul>
+          <li>10 sensei seats</li>
+          <li>Custom question authoring</li>
+          <li>Game history &amp; team stats</li>
+          <li>Slack invites &amp; scheduling</li>
+        </ul>
+        <button class="btn btn-seal" data-buy="company">Get Company</button>
+      </div>
+
+      <div class="tier">
+        <h3>Enterprise</h3>
+        <p class="who">Security review required? This one.</p>
+        <div class="price">$15k</div>
+        <div class="per">from, per year</div>
+        <ul>
+          <li>SSO / SAML</li>
+          <li>DPA &amp; security review</li>
+          <li>SLA and custom theming</li>
+        </ul>
+        <button class="btn btn-ghost" data-buy="enterprise">Talk to us</button>
+      </div>
+    </div>
+    <p class="price-note">Prices in USD. Single Event is a one-time purchase; Team and Company renew annually and can be cancelled anytime before renewal. If a technical failure on our side ends a paid event, that night is refunded — full stop.</p>
+  </div>
+</section>
+
+<section id="companies">
+  <div class="wrap">
+    <span class="sec-label">For People Ops</span>
+    <h2>The offsite activity, without the offsite logistics.</h2>
+    <div class="vs">
+      <div class="them">
+        <h3>Booking a hosted event</h3>
+        <ul>
+          <li>~$320 per session for ten people</li>
+          <li>Books two to four weeks out</li>
+          <li>A stranger hosts your team</li>
+          <li>One-off — the budget vanishes with the hour</li>
+        </ul>
+      </div>
+      <div class="us">
+        <h3>Running Social Samurai</h3>
+        <ul>
+          <li>$299 tonight, or unlimited nights on a plan</li>
+          <li>Ready the same afternoon</li>
+          <li>Your own sensei — a teammate hosts</li>
+          <li>Custom questions compound: year two is funnier than year one</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="faq">
+  <div class="wrap">
+    <span class="sec-label">Questions</span>
+    <h2>Asked before drawing.</h2>
+    <div class="faq">
+      <details>
+        <summary>What do we need to run it?</summary>
+        <div class="a">A laptop with a browser, a screen everyone can see (TV, projector, or a shared screen on your video call), and each player's phone. That's the whole stack.</div>
+      </details>
+      <details>
+        <summary>How many players does it support?</summary>
+        <div class="a">Eight players is the sweet spot; a Single Event night supports up to 30. Larger than that, split into two rooms and crown a champion of champions.</div>
+      </details>
+      <details>
+        <summary>Does it work for remote and hybrid teams?</summary>
+        <div class="a">Yes. Share the stage screen on your video call and everyone joins from their phone, wherever they are. It was built for exactly this.</div>
+      </details>
+      <details>
+        <summary>What happens to what people write?</summary>
+        <div class="a">By default, nothing is stored — answers live for the night and are gone when the room closes. On plans with game history, your organization controls retention and can delete everything at any time. Details in our <a href="privacy.html">privacy policy</a>.</div>
+      </details>
+      <details>
+        <summary>Can we write our own questions?</summary>
+        <div class="a">On the Company plan, yes — your own question library, with an approval step so nothing reaches the big screen that shouldn't. The stock bank of 80 is included on every plan.</div>
+      </details>
+      <details>
+        <summary>What if something breaks during our event?</summary>
+        <div class="a">If a technical failure on our side ends a paid event, we refund that night. No form, no argument.</div>
+      </details>
+    </div>
+  </div>
+</section>
+
+<section class="final">
+  <div class="wrap">
+    <div class="seal-stamp" aria-hidden="true">侍</div>
+    <h2>Thursday is coming.</h2>
+    <p>Book a night now — you can run it this week.</p>
+    <button class="btn btn-seal" data-buy="event">Book a night — $299</button>
+  </div>
+</section>
+
+<footer>
+  <div class="wrap foot-in">
+    <span class="foot-brand">SOCIAL SAMURAI</span>
+    <a href="privacy.html">Privacy</a>
+    <a href="terms.html">Terms</a>
+    <a href="mailto:hello@socialsamurai.io">hello@socialsamurai.io</a>
+    <span>© 2026 Social Samurai</span>
+  </div>
+</footer>
+
+<dialog id="buy">
+  <div class="buy-in">
+    <h3 id="buy-title">Book a night</h3>
+    <p class="tierline" id="buy-tier">SINGLE EVENT · $299</p>
+    <p id="buy-copy">Checkout opens shortly — we're finishing payment setup. Leave your email and you'll get the booking link the moment it's live, with founding-customer pricing locked in.</p>
+    <div class="row">
+      <a class="btn btn-seal" id="buy-mail" href="#">Email us to book</a>
+      <button class="buy-close" id="buy-close" type="button">Close</button>
+    </div>
+  </div>
+</dialog>
+
+<script>
+/* ============================================================
+   Purchasing logic.
+   Phase now  : Stripe Payment Links. Create the four links in the
+                Stripe dashboard (no code) and paste the URLs below.
+                Buttons route straight to Stripe Checkout.
+   Phase next : replace links with a server-created Checkout Session
+                once accounts/orgs exist (see docs/PLAN.md).
+   Until a link is set, buttons open a booking dialog that falls
+   back to email — no dead buttons, every click is capturable.
+   ============================================================ */
+const TIERS = {
+  event:      { name: "Single Event", line: "SINGLE EVENT · $299 · ONE NIGHT",  link: "" },
+  team:       { name: "Team",         line: "TEAM · $900 / YEAR",               link: "" },
+  company:    { name: "Company",      line: "COMPANY · $4,800 / YEAR",          link: "" },
+  enterprise: { name: "Enterprise",   line: "ENTERPRISE · FROM $15,000 / YEAR", link: null } // always talk-to-us
+};
+const CONTACT = "hello@socialsamurai.io";
+
+const dlg = document.getElementById("buy");
+document.querySelectorAll("[data-buy]").forEach(btn => {
+  btn.addEventListener("click", () => {
+    const t = TIERS[btn.dataset.buy];
+    if (t.link) { window.location.href = t.link; return; }
+    document.getElementById("buy-title").textContent =
+      t.link === null ? "Talk to us" : t.name;
+    document.getElementById("buy-tier").textContent = t.line;
+    document.getElementById("buy-copy").textContent = t.link === null
+      ? "Enterprise plans come with SSO, a DPA, and a security review. Tell us about your org and we'll come back within one business day."
+      : "Checkout opens shortly — we're finishing payment setup. Email us now and you'll get the booking link the moment it's live, with founding-customer pricing locked in.";
+    const subject = encodeURIComponent("Social Samurai — " + t.name);
+    const body = encodeURIComponent("Hi — I'd like to book Social Samurai (" + t.name + ").\n\nCompany:\nTeam size:\nTarget date:\n");
+    document.getElementById("buy-mail").href = "mailto:" + CONTACT + "?subject=" + subject + "&body=" + body;
+    dlg.showModal();
+  });
+});
+document.getElementById("buy-close").addEventListener("click", () => dlg.close());
+dlg.addEventListener("click", e => { if (e.target === dlg) dlg.close(); });
+
+/* Stripe sends buyers back with ?checkout=success — show the confirmation banner. */
+if (new URLSearchParams(location.search).get("checkout") === "success") {
+  document.getElementById("thanks").classList.add("show");
+}
+</script>
+
+</body>
+</html>

@@ -1,0 +1,111 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Privacy Policy — Social Samurai</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Shippori+Mincho:wght@700;800&family=IBM+Plex+Sans:wght@400;500;600&family=IBM+Plex+Mono:wght@400;600&display=swap">
+<style>
+  :root{
+    color-scheme:light;
+    --paper:#F1EDE3; --paper-raise:#F9F6EE; --ink:#1B1B22; --ink-2:#4C4B55; --ink-3:#807E87;
+    --rule:#D5D0C2; --seal:#B4232C;
+  }
+  @media (prefers-color-scheme:dark){
+    :root:not([data-theme="light"]){
+      color-scheme:dark;
+      --paper:#131318; --paper-raise:#1B1B22; --ink:#EAE6DB; --ink-2:#A9A6B0; --ink-3:#7B7983;
+      --rule:#2A2A33; --seal:#E0575E;
+    }
+  }
+  :root[data-theme="dark"]{
+    color-scheme:dark;
+    --paper:#131318; --paper-raise:#1B1B22; --ink:#EAE6DB; --ink-2:#A9A6B0; --ink-3:#7B7983;
+    --rule:#2A2A33; --seal:#E0575E;
+  }
+  *{box-sizing:border-box}
+  body{margin:0;background:var(--paper);color:var(--ink);font-family:"IBM Plex Sans",-apple-system,sans-serif;font-size:16px;line-height:1.65}
+  .wrap{max-width:720px;margin:0 auto;padding:0 24px 90px}
+  a{color:var(--seal)}
+  nav{border-bottom:1px solid var(--rule);padding:14px 24px;font-size:14px}
+  nav a{color:var(--ink-2);text-decoration:none;font-weight:500}
+  .kicker{font-family:"IBM Plex Mono",monospace;font-size:12px;letter-spacing:.22em;text-transform:uppercase;color:var(--seal);margin:60px 0 14px;font-weight:600}
+  h1{font-family:"Shippori Mincho",Georgia,serif;font-size:38px;font-weight:800;margin:0 0 8px;line-height:1.1}
+  .updated{font-family:"IBM Plex Mono",monospace;font-size:12.5px;color:var(--ink-3);margin:0 0 34px}
+  .draft{background:var(--paper-raise);border:1px dashed var(--seal);border-radius:6px;padding:14px 18px;font-size:14px;color:var(--ink-2);margin:0 0 40px}
+  h2{font-family:"Shippori Mincho",Georgia,serif;font-size:22px;font-weight:700;margin:44px 0 12px}
+  p,li{color:var(--ink-2);font-size:15.5px}
+  ul{padding-left:22px}
+  .contact{border-top:2px solid var(--ink);margin-top:56px;padding-top:20px;font-size:14px;color:var(--ink-3)}
+</style>
+</head>
+<body>
+<nav><a href="index.html">← Social Samurai</a></nav>
+<div class="wrap">
+  <p class="kicker">Legal</p>
+  <h1>Privacy Policy</h1>
+  <p class="updated">Draft · Last updated August 29, 2026</p>
+
+  <div class="draft"><strong>Draft status:</strong> this policy is a working draft prepared ahead of launch. It reflects how the product is designed to handle data, and will be reviewed by counsel before paid launch. It is published now so buyers can see our posture early.</div>
+
+  <h2>The short version</h2>
+  <p>Social Samurai is a live game your team plays together. By default, what players write during a game lives only for that game night and is not stored after the room closes. We collect the minimum needed to run the service and bill for it, we never sell personal information, and payments are handled by Stripe so card numbers never touch our systems.</p>
+
+  <h2>What we collect</h2>
+  <ul>
+    <li><strong>Account information.</strong> When an organization signs up: name, work email, company name, and the sensei seats the admin creates.</li>
+    <li><strong>Billing information.</strong> Handled by Stripe, our payment processor. We receive confirmation of payment, the plan purchased, and billing contact details — never full card numbers.</li>
+    <li><strong>Game play, by default: nothing.</strong> Player answers, votes, and scores exist in the live game session and are discarded when the room ends. Players join with a display name only — no player accounts, no emails collected from players.</li>
+    <li><strong>Game history, on plans that include it.</strong> Organizations on plans with game history can choose to store past games (scores, questions used, and answers). This is off until an admin turns it on, the organization controls it, and an admin can delete any or all of it at any time.</li>
+    <li><strong>Usage and device data.</strong> Standard server logs (IP address, browser type, timestamps) kept briefly for security and debugging.</li>
+  </ul>
+
+  <h2>What we use it for</h2>
+  <ul>
+    <li>Running games and keeping rooms private to the people who have the room code.</li>
+    <li>Billing, receipts, and renewal notices.</li>
+    <li>Support — answering you when you write to us.</li>
+    <li>Keeping the service secure and diagnosing failures.</li>
+  </ul>
+  <p>We do not sell personal information, and we do not use game content for advertising or to train machine-learning models.</p>
+
+  <h2>Who else touches the data (subprocessors)</h2>
+  <ul>
+    <li><strong>Stripe</strong> — payments and billing.</li>
+    <li><strong>Supabase</strong> — realtime game infrastructure and, where enabled, stored game history.</li>
+    <li><strong>Our hosting provider</strong> — serving the website and game.</li>
+  </ul>
+  <p>A current list is available on request at the address below. Enterprise customers receive a Data Processing Agreement (DPA) covering these subprocessors.</p>
+
+  <h2>Retention and deletion</h2>
+  <ul>
+    <li>Default game data: not retained — it is gone when the room closes.</li>
+    <li>Stored game history: retained until the organization deletes it or the subscription ends, after which it is deleted within 30 days.</li>
+    <li>Account and billing records: kept for as long as the account is active and as required for tax and accounting law.</li>
+    <li>Any person can ask us to delete their personal information at the address below; organizational admins can delete organizational data from the admin console.</li>
+  </ul>
+
+  <h2>Your rights</h2>
+  <p>Depending on where you live (including the EU/EEA, UK, and California), you may have the right to access, correct, export, or delete your personal information, and to object to certain processing. Write to us and we will honor these requests within the legally required window. We do not discriminate against anyone for exercising privacy rights.</p>
+
+  <h2>Employees playing at work</h2>
+  <p>When your employer runs Social Samurai, your employer is the "controller" of any stored game history, and we process it on their instructions. Questions about what your company stores should go first to your admin; we will help either way.</p>
+
+  <h2>Children</h2>
+  <p>Social Samurai is a workplace product and is not directed at children under 16. We do not knowingly collect personal information from children.</p>
+
+  <h2>Security</h2>
+  <p>Game rooms are protected by unguessable, expiring room tokens. Access to production systems is limited and logged. Payments are processed by Stripe, a PCI-DSS Level 1 provider. No system is perfectly secure; if a breach affects your personal information, we will notify you as the law requires — and faster if we can.</p>
+
+  <h2>Changes</h2>
+  <p>If this policy changes in a way that matters, we will note it here with a new date and email organizational admins. Continued use after a change means acceptance of the updated policy.</p>
+
+  <div class="contact">
+    Questions or requests: <a href="mailto:hello@socialsamurai.io">hello@socialsamurai.io</a><br>
+    Social Samurai · United States
+  </div>
+</div>
+</body>
+</html>
