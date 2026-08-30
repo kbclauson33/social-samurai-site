@@ -1,0 +1,1263 @@
+<meta charset="utf-8">
+<title>Social Samurai</title>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Noto+Serif+JP:wght@400;700&text=侍巻物評定心衆金銀銅将軍先生弟子浪人壱弐参四五入門下誉主認続式逆刃一二三免許皆伝&display=swap">
+<style>
+/* ============================================================
+   SOCIAL SAMURAI — marketing site
+   Ink-wash dojo. Single committed dark world (the site IS the dojo).
+   ============================================================ */
+:root{
+  --bg:#141114; --stage:#0f0c0e; --panel:#0b090a;
+  --ink:#ede4d3; --ink-2:#e6dcc8;
+  --ink-dim:rgba(237,228,211,.55); --ink-faint:rgba(237,228,211,.14);
+  --paper:#e9dfcc; --paper-ink:#221c1e;
+  --red:#a8232a; --red-2:#c9303a; --red-3:#b8434b; --red-4:#d8656d;
+  --gold:#e8c063;
+  --b-white:#e9dfcc; --b-yellow:#caa84c; --b-orange:#b06c34; --b-green:#5c7a4e;
+  --b-blue:#4e6a86; --b-brown:#6b4a38; --b-black:#26211f;
+  --serif:'Palatino Linotype',Palatino,'Book Antiqua',Georgia,serif;
+  --mincho:'Noto Serif JP','Hiragino Mincho ProN','Yu Mincho',serif;
+  --sans:ui-sans-serif,system-ui,-apple-system,'Segoe UI',sans-serif;
+}
+*{box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{margin:0;background:var(--bg);color:var(--ink);font-family:var(--sans);
+  overflow-x:hidden;-webkit-font-smoothing:antialiased;line-height:1.5}
+a{color:var(--red-3)} a:hover{color:var(--red-4)}
+:focus-visible{outline:2px solid var(--red-2);outline-offset:2px}
+img,svg{max-width:100%}
+.noise{position:fixed;inset:0;pointer-events:none;z-index:90;opacity:.05;mix-blend-mode:overlay;
+  background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='240' height='240'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.85' numOctaves='2'/%3E%3C/filter%3E%3Crect width='240' height='240' filter='url(%23n)'/%3E%3C/svg%3E")}
+
+/* ---------------- keyframes (ported from the product + site-new) -------- */
+@keyframes ensoDraw{from{stroke-dashoffset:430}to{stroke-dashoffset:0}}
+@keyframes ensoDraw2{from{stroke-dashoffset:290}to{stroke-dashoffset:0}}
+@keyframes fadeUp{from{opacity:0;transform:translateY(16px)}to{opacity:1;transform:none}}
+@keyframes fadeIn{from{opacity:0}to{opacity:1}}
+@keyframes splat{0%{transform:scale(0);opacity:0}30%{transform:scale(1);opacity:.95}70%{opacity:.6}100%{transform:scale(1.08);opacity:0}}
+@keyframes stampIn{0%{opacity:0;transform:scale(1.25) rotate(-3deg)}60%{opacity:1;transform:scale(.97) rotate(.5deg)}100%{opacity:1;transform:scale(1) rotate(0)}}
+@keyframes cdPop{0%{opacity:0;transform:scale(1.6)}45%{opacity:1;transform:scale(1)}100%{opacity:1;transform:scale(1)}}
+@keyframes slowPulse{0%,100%{opacity:.35}50%{opacity:.95}}
+@keyframes breathe{0%,100%{transform:scale(1);opacity:.85}50%{transform:scale(1.05);opacity:1}}
+@keyframes bob{0%,100%{transform:translateY(0)}50%{transform:translateY(9px)}}
+@keyframes underIn{from{transform:scaleX(0)}to{transform:scaleX(1)}}
+@keyframes slashAcross{0%{transform:rotate(-14deg) scaleX(0);opacity:1}55%{transform:rotate(-14deg) scaleX(1);opacity:1}100%{transform:rotate(-14deg) scaleX(1);opacity:0}}
+@keyframes halfTop{to{transform:translate(-26px,-58px) rotate(-8deg);opacity:0}}
+@keyframes halfBot{to{transform:translate(30px,64px) rotate(7deg);opacity:0}}
+@keyframes revealPop{from{opacity:0;transform:scale(.94)}to{opacity:1;transform:none}}
+@keyframes heroSlash{0%{transform:rotate(-70deg);opacity:0}2.5%{opacity:1}6%{transform:rotate(18deg);opacity:1}10%{transform:rotate(24deg);opacity:0}100%{transform:rotate(24deg);opacity:0}}
+@keyframes heroArc{0%{stroke-dashoffset:150;opacity:0}1%{opacity:1}7%{opacity:.9}11%{stroke-dashoffset:0;opacity:0}100%{stroke-dashoffset:0;opacity:0}}
+@keyframes threadDraw{from{stroke-dashoffset:400}to{stroke-dashoffset:0}}
+@keyframes reelUp{from{transform:translateY(0)}to{transform:translateY(-50%)}}
+@keyframes flipIn{from{opacity:0;transform:perspective(700px) rotateX(78deg)}to{opacity:1;transform:none}}
+@keyframes chipPop{0%{opacity:0;transform:translateY(6px) scale(.8)}20%{opacity:1;transform:none}80%{opacity:1}100%{opacity:0;transform:translateY(-8px)}}
+@keyframes speakRing{0%,100%{box-shadow:0 0 0 0 rgba(201,48,58,.55)}50%{box-shadow:0 0 0 6px rgba(201,48,58,0)}}
+@keyframes syncDot{0%{offset-distance:0%;opacity:0}6%{opacity:1}30%{offset-distance:100%;opacity:1}36%{opacity:0}100%{offset-distance:100%;opacity:0}}
+@keyframes syncPress{0%,7%{transform:scale(1)}3%{transform:scale(.93)}100%{transform:scale(1)}}
+@keyframes syncPlus{0%,29%{opacity:0;transform:scale(1.5)}33%{opacity:1;transform:scale(1)}55%{opacity:1}64%{opacity:0}100%{opacity:0}}
+@keyframes chatCycle{0%,2%{opacity:0;transform:translateY(10px)}6%,28%{opacity:1;transform:none}33%,100%{opacity:0;transform:translateY(-6px)}}
+@keyframes beltTie{from{transform:scaleX(0)}to{transform:scaleX(1)}}
+@keyframes knotPop{0%{opacity:0;transform:scale(0) rotate(45deg)}70%{transform:scale(1.25) rotate(45deg)}100%{opacity:1;transform:scale(1) rotate(45deg)}}
+@keyframes vignetteFlash{0%,100%{opacity:0}18%{opacity:.5}}
+@keyframes presentWipe{from{clip-path:inset(46% 46% 46% 46%)}to{clip-path:inset(0 0 0 0)}}
+
+/* ---------------- reveal utility ---------------- */
+.rv{opacity:0;transform:translateY(18px);transition:opacity .7s ease,transform .7s ease}
+.rv.in{opacity:1;transform:none}
+.d1{transition-delay:.12s}.d2{transition-delay:.24s}.d3{transition-delay:.36s}
+.d4{transition-delay:.48s}.d5{transition-delay:.6s}.d6{transition-delay:.72s}
+
+/* ---------------- type ---------------- */
+.kicker{font-size:11px;letter-spacing:.32em;text-transform:uppercase;color:var(--gold);margin:0 0 14px}
+.kicker.red{color:var(--red-3)}
+h1,h2,h3{font-family:var(--serif);font-weight:400;text-wrap:balance;margin:0}
+.h-xl{font-size:clamp(34px,6.4vw,72px);letter-spacing:.3em;margin-left:.3em;text-align:center}
+.h-lg{font-size:clamp(26px,4vw,44px);letter-spacing:.12em;line-height:1.2}
+.h-md{font-size:clamp(20px,2.6vw,28px);letter-spacing:.1em}
+.sub{font-style:italic;color:var(--ink-dim);font-size:clamp(15px,1.8vw,19px);max-width:56ch}
+.body-c{color:var(--ink-2);font-size:16px;max-width:52ch}
+.kanji{font-family:var(--mincho)}
+.microtag{font-size:10px;letter-spacing:.28em;text-transform:uppercase;color:var(--ink-dim)}
+
+/* ---------------- buttons ---------------- */
+.btn{display:inline-flex;align-items:center;gap:10px;padding:16px 30px;cursor:pointer;
+  font-family:var(--sans);font-size:12px;font-weight:700;letter-spacing:.26em;text-transform:uppercase;
+  text-decoration:none;border:none;color:#f0e7d5;background:var(--red);position:relative;overflow:hidden;
+  border-radius:3px 12px 4px 10px / 10px 4px 12px 3px;transition:filter .2s,transform .2s}
+.btn:hover{filter:brightness(1.15);transform:translateY(-1px);color:#fff}
+.btn .seal{font-family:var(--mincho);font-size:14px;font-weight:400}
+.btn.ghost{background:transparent;border:1px solid var(--ink-faint);color:var(--ink-dim);font-weight:400}
+.btn.ghost:hover{border-color:rgba(237,228,211,.4);color:var(--ink)}
+.btn.gold{background:linear-gradient(120deg,#8f6a1f,#b98f33);color:#160f08}
+.btn::after{content:'';position:absolute;top:0;left:-80%;width:40%;height:100%;
+  background:linear-gradient(100deg,transparent,rgba(255,255,255,.16),transparent);transform:skewX(-20deg)}
+.btn:hover::after{transition:left .5s ease;left:130%}
+
+/* ---------------- nav ---------------- */
+nav{position:fixed;top:0;left:0;right:0;z-index:80;display:flex;align-items:center;gap:26px;
+  padding:14px 26px;background:rgba(11,9,10,.85);backdrop-filter:blur(8px);
+  border-bottom:1px solid rgba(232,192,99,.14)}
+.nav-mark{display:flex;align-items:center;gap:10px;text-decoration:none;color:var(--ink)}
+.nav-mark svg{width:26px;height:26px;flex:none}
+.nav-mark span{font-family:var(--serif);font-size:14px;letter-spacing:.3em}
+.nav-links{display:flex;gap:22px;margin-left:auto}
+.nav-links a{font-size:11px;letter-spacing:.26em;text-transform:uppercase;text-decoration:none;
+  color:var(--ink-dim);padding:6px 2px;position:relative}
+.nav-links a::after{content:'';position:absolute;left:0;right:100%;bottom:0;height:2px;
+  background:var(--red-2);transition:right .25s ease;border-radius:2px}
+.nav-links a:hover,.nav-links a.on{color:var(--ink)}
+.nav-links a:hover::after,.nav-links a.on::after{right:0}
+.nav-cta{flex:none;padding:11px 20px;font-size:11px}
+@media(max-width:640px){.nav-links{gap:14px}.nav-mark span{display:none}nav{gap:12px;padding:12px 16px}}
+
+/* ---------------- page shell ---------------- */
+.page{display:none}
+.page.active{display:block}
+section.blk{position:relative;padding:110px 24px;overflow:hidden}
+.wrap{max-width:1100px;margin:0 auto;position:relative}
+.watermark{position:absolute;pointer-events:none;font-family:var(--mincho);line-height:1;
+  color:rgba(237,228,211,.045);z-index:0;user-select:none}
+
+/* ---------------- avatars / kamon ---------------- */
+.ava{border-radius:50%;position:relative;display:flex;align-items:center;justify-content:center;flex:none}
+.ava .km{width:62%;height:62%}
+.ava.breathe{animation:breathe 4.4s ease-in-out infinite}
+
+/* ============================================================ HERO */
+.hero{min-height:100vh;display:flex;flex-direction:column;align-items:center;justify-content:center;
+  gap:22px;text-align:center;background:var(--stage);position:relative;padding:120px 20px 80px}
+.hero .watermark{font-size:min(40vw,480px);top:50%;left:50%;transform:translate(-50%,-54%)}
+.enso-mark{position:relative;width:min(24vmin,190px);height:min(24vmin,190px);
+  display:flex;align-items:center;justify-content:center;margin-bottom:6px}
+.enso-mark .hero-enso{position:absolute;inset:-9%;width:118%;height:118%;pointer-events:none}
+.enso-mark .mk{font-family:var(--mincho);font-size:min(11vmin,86px);color:var(--red-2);line-height:1;
+  opacity:0}
+.hero.armed .enso-mark .mk{animation:fadeIn .8s ease 1.2s both}
+.hero-core{position:relative;z-index:2;display:flex;flex-direction:column;align-items:center;gap:20px}
+.hero h1{color:var(--ink)}
+.hero .seal-stamp{display:inline-block;font-family:var(--mincho);font-size:.38em;color:#f2e9d8;
+  background:var(--red);padding:.28em .32em;border-radius:3px;vertical-align:super;margin-left:.25em;letter-spacing:0}
+.hero .sub{position:relative;padding-bottom:14px}
+.hero .sub::after{content:'';position:absolute;left:8%;right:8%;bottom:0;height:2px;background:var(--red-2);
+  transform-origin:left;transform:scaleX(0);border-radius:2px}
+.hero.armed .sub::after{animation:underIn .7s ease 2.5s both}
+.hero-ctas{display:flex;gap:14px;flex-wrap:wrap;justify-content:center;margin-top:8px}
+.hero-meta{font-size:11px;letter-spacing:.24em;text-transform:uppercase;color:var(--ink-dim)}
+.hero .splat-dot{position:absolute;border-radius:47% 53% 44% 56%/58% 43% 57% 42%;background:var(--red);opacity:0;z-index:1}
+.hero.armed .splat-dot.s1{width:26px;height:24px;top:16%;left:57%;animation:splat 1s ease 1.7s both}
+.hero.armed .splat-dot.s2{width:14px;height:15px;top:13%;left:61%;animation:splat 1s ease 1.85s both}
+.hero-enso circle{fill:none;stroke:var(--red);stroke-linecap:round}
+.hero.armed .enso-a{stroke-dasharray:430 490;animation:ensoDraw 1.9s ease-out both}
+.hero.armed .enso-b{stroke-dasharray:290 478;opacity:.5;animation:ensoDraw2 1.9s ease-out .15s both}
+.fighter{position:absolute;bottom:5vh;width:min(13vw,120px);opacity:.65;z-index:1}
+.fighter.fl{left:4vw}.fighter.fr{right:4vw;transform:scaleX(-1)}
+.fighter .sword{transform-origin:var(--hx) var(--hy);animation:heroSlash 9s ease-out infinite}
+.fighter .arc{stroke-dasharray:150;animation:heroArc 9s ease-out infinite}
+.fighter.fr .sword{animation-delay:4.5s}.fighter.fr .arc{animation-delay:4.5s}
+.scroll-cue{position:absolute;bottom:26px;left:50%;transform:translateX(-50%);
+  font-family:var(--mincho);color:var(--ink-dim);font-size:20px;animation:bob 2.4s ease-in-out infinite;z-index:2}
+@media(max-width:640px){.fighter{display:none}}
+
+/* ============================================================ COLD GRID */
+.coldgrid{background:var(--bg)}
+.grid9-wrap{position:relative;max-width:760px;margin:54px auto 0}
+.grid9{display:grid;grid-template-columns:repeat(3,1fr);gap:14px;position:relative;z-index:2}
+.tile{position:relative;aspect-ratio:4/3;border-radius:10px;background:#191619;overflow:hidden;
+  border:1px solid rgba(237,228,211,.07)}
+.t-real{position:absolute;inset:0;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:8px;
+  background:linear-gradient(160deg,#1c1719,#141114)}
+.t-real .nm{font-size:10px;letter-spacing:.22em;text-transform:uppercase;color:var(--ink-2)}
+.t-real .ava{box-shadow:inset 0 0 0 2px rgba(232,192,99,.6)}
+.t-ghost-t,.t-ghost-b{position:absolute;left:0;right:0;background:#232025;z-index:3}
+.t-ghost-t{top:0;height:52%;clip-path:polygon(0 0,100% 0,100% 96%,0 84%)}
+.t-ghost-b{bottom:0;height:52%;clip-path:polygon(0 68%,100% 80%,100% 100%,0 100%)}
+.t-ghost-t::before{content:'';position:absolute;left:50%;top:34%;width:34px;height:34px;margin-left:-17px;
+  border-radius:50%;background:#302c33}
+.t-ghost-b::before{content:'';position:absolute;left:50%;bottom:18%;width:60%;margin-left:-30%;height:8px;
+  border-radius:4px;background:#2b272e}
+.t-ghost-b::after{content:'muted';position:absolute;right:8px;bottom:6px;font-size:8px;letter-spacing:.2em;
+  text-transform:uppercase;color:rgba(237,228,211,.25)}
+.t-slash{position:absolute;left:-8%;right:-8%;top:46%;height:3px;background:linear-gradient(90deg,transparent,var(--red-2),#f0e7d5,var(--red-2),transparent);
+  transform-origin:left center;transform:rotate(-14deg) scaleX(0);z-index:4;border-radius:2px}
+.coldgrid.in .tile .t-slash{animation:slashAcross .55s ease var(--td) both}
+.coldgrid.in .tile .t-ghost-t{animation:halfTop .7s ease calc(var(--td) + .3s) both}
+.coldgrid.in .tile .t-ghost-b{animation:halfBot .7s ease calc(var(--td) + .3s) both}
+.threads{position:absolute;inset:0;z-index:1;pointer-events:none}
+.threads line{stroke:var(--gold);stroke-width:1;opacity:0;stroke-dasharray:400}
+.coldgrid.in .threads line{opacity:.35;animation:threadDraw 1.1s ease var(--td) both}
+
+/* ============================================================ TWO FORMS */
+.form-blk{min-height:92vh;display:flex;align-items:center;background:var(--stage)}
+.form-grid{display:grid;grid-template-columns:1fr 1fr;gap:60px;align-items:center}
+@media(max-width:860px){.form-grid{grid-template-columns:1fr;gap:36px}}
+.form-blk .watermark{font-size:min(30vw,340px);right:-4%;bottom:-10%}
+.form-blk.alt .watermark{left:-4%;right:auto}
+
+/* katana-cut card */
+.cutzone{height:175vh;position:relative}
+.cutstick{position:sticky;top:0;min-height:100vh;display:flex;align-items:center;justify-content:center}
+.cut-card{position:relative;width:min(420px,86vw);aspect-ratio:5/3.2}
+.paper-face{position:absolute;inset:0;background:var(--paper);color:var(--paper-ink);border-radius:8px;
+  padding:30px;display:flex;flex-direction:column;justify-content:center;gap:12px;
+  box-shadow:0 20px 60px rgba(0,0,0,.5)}
+.paper-face .q-tag{font-size:9px;letter-spacing:.3em;text-transform:uppercase;color:#8a7a5e}
+.paper-face .q{font-family:var(--serif);font-size:clamp(18px,2.4vw,24px);line-height:1.3}
+.paper-face .a{font-style:italic;color:#5d5340;font-size:15px}
+.cut-half{position:absolute;inset:0;z-index:3}
+.cut-half.t{clip-path:polygon(0 0,100% 0,100% 56%,0 42%)}
+.cut-half.b{clip-path:polygon(0 42%,100% 56%,100% 100%,0 100%)}
+.cut-slash{position:absolute;left:-12%;right:-12%;top:47%;height:4px;z-index:5;border-radius:3px;
+  background:linear-gradient(90deg,transparent,var(--red-2),#fff6e0,var(--red-2),transparent);
+  transform-origin:left center;transform:rotate(-8deg) scaleX(0)}
+.cut-reveal{position:absolute;inset:0;z-index:1;display:flex;flex-direction:column;align-items:center;
+  justify-content:center;gap:12px;opacity:0}
+.cut-reveal .who{font-family:var(--serif);font-size:19px;letter-spacing:.06em;color:var(--ink)}
+.cut-reveal .plus{font-family:var(--serif);font-size:34px;color:var(--red-3)}
+.cutzone.cut .cut-slash{animation:slashAcross .6s ease .1s both}
+.cutzone.cut .cut-half.t{animation:halfTop .9s cubic-bezier(.4,0,.6,1) .62s both}
+.cutzone.cut .cut-half.b{animation:halfBot .9s cubic-bezier(.4,0,.6,1) .62s both}
+.cutzone.cut .cut-reveal{animation:revealPop .6s ease 1.1s both}
+.cutzone.cut .cut-reveal .plus{animation:cdPop .7s ease 1.5s both}
+.cut-hint{position:absolute;bottom:8vh;left:50%;transform:translateX(-50%);font-size:10px;
+  letter-spacing:.3em;text-transform:uppercase;color:var(--ink-dim);opacity:.7}
+
+/* council demo */
+.council-demo{position:relative;padding:30px 0 12px}
+.vote-chips{display:flex;gap:16px;margin-bottom:34px}
+.vchip{display:flex;align-items:center;gap:10px;padding:12px 18px;border-radius:99px;font-size:11px;
+  letter-spacing:.22em;text-transform:uppercase;border:1px solid var(--ink-faint);opacity:0}
+.vchip .kanji{font-size:17px}
+.vchip.heart{color:var(--red-3);border-color:rgba(201,48,58,.4)}
+.vchip.crowd{color:var(--gold);border-color:rgba(232,192,99,.4)}
+.form-blk.in .vchip.heart{animation:stampIn .55s ease .2s both}
+.form-blk.in .vchip.crowd{animation:stampIn .55s ease .45s both}
+.council-row{display:flex;gap:18px;align-items:flex-end}
+.council-row .cand{display:flex;flex-direction:column;align-items:center;gap:8px;position:relative}
+.cand .nm{font-size:9px;letter-spacing:.2em;text-transform:uppercase;color:var(--ink-dim)}
+.cand.winner .ava{box-shadow:inset 0 0 0 2px var(--gold),0 0 24px rgba(232,192,99,.35)}
+.council-svg{position:absolute;inset:0;pointer-events:none;overflow:visible}
+.council-svg path{fill:none;stroke-width:1.2;stroke-dasharray:400;opacity:0}
+.form-blk.in .council-svg path{animation:threadDraw 1s ease both;opacity:.55}
+.form-blk.in .council-svg path.p1{animation-delay:.8s;stroke:var(--red-3)}
+.form-blk.in .council-svg path.p2{animation-delay:1s;stroke:var(--gold)}
+.form-blk.in .cand.winner .ava{animation:breathe 3s ease-in-out 1.6s infinite}
+
+/* ============================================================ DISCIPLINES */
+.disc{background:var(--bg)}
+.disc-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:18px;margin-top:50px}
+@media(max-width:860px){.disc-grid{grid-template-columns:1fr 1fr}}
+@media(max-width:560px){.disc-grid{grid-template-columns:1fr}}
+.disc-card{background:var(--panel);border:1px solid rgba(237,228,211,.08);border-radius:12px;
+  padding:26px 24px;display:flex;flex-direction:column;gap:12px;opacity:0}
+.disc.in .disc-card{animation:stampIn .5s ease var(--td) both}
+.disc-card .glyph{font-family:var(--mincho);font-size:30px;color:var(--red-3);line-height:1}
+.disc-card h3{font-size:13px;letter-spacing:.26em;font-family:var(--sans);font-weight:700;
+  text-transform:uppercase;color:var(--ink)}
+.disc-card p{margin:0;font-size:14px;color:var(--ink-dim);font-style:italic}
+
+/* ============================================================ SHOWCASE */
+.showcase{background:var(--stage)}
+.devices{position:relative;margin:64px auto 30px;max-width:900px;min-height:520px}
+.laptop{position:relative;width:min(680px,88vw);margin-right:auto;transform:rotate(-1.6deg)}
+.laptop .lid{background:#060505;border:1px solid #262024;border-radius:14px 14px 4px 4px;padding:12px 12px 16px}
+.laptop .deck{height:14px;background:linear-gradient(#1b1719,#0c0a0b);border-radius:0 0 12px 12px;
+  margin:0 -26px;border:1px solid #262024;border-top:none}
+.lap-screen{aspect-ratio:16/9;border-radius:6px;overflow:hidden;position:relative;background:var(--stage)}
+.phone{position:absolute;right:max(0px,4%);bottom:-40px;width:194px;transform:rotate(2.4deg);z-index:5}
+.phone .shell{background:#060505;border:1px solid #2c252a;border-radius:26px;padding:9px;box-shadow:0 24px 60px rgba(0,0,0,.6)}
+.phone .ph-screen{border-radius:18px;overflow:hidden;background:#151113;aspect-ratio:9/18.6;position:relative;
+  display:flex;flex-direction:column}
+.phone .notch{position:absolute;top:14px;left:50%;transform:translateX(-50%);width:56px;height:14px;
+  background:#060505;border-radius:8px;z-index:6}
+@media(max-width:760px){.devices{min-height:0;display:flex;flex-direction:column;align-items:center;gap:34px}
+  .phone{position:static;transform:rotate(0)}.laptop{transform:none;margin:0 auto}}
+
+/* --- stage mini (used in laptop + meet) --- */
+.stage-mini{position:absolute;inset:0;background:var(--stage);font-size:10px;overflow:hidden}
+.stage-mini .vig{position:absolute;inset:0;background:radial-gradient(120% 90% at 50% 40%,transparent 55%,rgba(0,0,0,.5));pointer-events:none}
+.sm-top{position:absolute;top:0;left:0;right:0;display:flex;justify-content:center;padding:4.5% 0 0;
+  font-size:.62em;letter-spacing:.3em;color:var(--ink-dim);text-transform:uppercase}
+.sm-top .kanji{color:var(--red-3);margin:0 .5em}
+.sm-card{position:absolute;top:50%;left:50%;transform:translate(-50%,-52%);width:46%;background:var(--paper);
+  color:var(--paper-ink);border-radius:5px;padding:4.5% 4%;text-align:center;box-shadow:0 8px 30px rgba(0,0,0,.45)}
+.sm-card .q{font-family:var(--serif);font-size:1.02em;line-height:1.35}
+.sm-card .a{font-style:italic;color:#5d5340;font-size:.8em;margin-top:6%}
+.sm-ava{position:absolute;width:9%;aspect-ratio:1;border-radius:50%;display:flex;align-items:center;justify-content:center}
+.sm-rail{position:absolute;right:2.4%;top:14%;bottom:14%;width:17%;display:flex;flex-direction:column;gap:5%;justify-content:center}
+.sm-rail .r{display:flex;align-items:center;gap:6%;font-size:.6em;color:var(--ink-2)}
+.sm-rail .r b{margin-left:auto;font-family:var(--serif);font-weight:400;color:var(--ink-dim)}
+.sm-rail .dot{width:.9em;height:.9em;border-radius:50%;flex:none}
+.sm-count{position:absolute;left:3%;bottom:5%;display:flex;align-items:center;gap:6px;color:var(--ink-dim);
+  font-size:.68em;letter-spacing:.2em}
+.sm-count .ring{width:2em;height:2em;border-radius:50%;border:2px solid var(--red-2);
+  border-top-color:rgba(201,48,58,.25);animation:slowPulse 2s ease-in-out infinite}
+.sm-plus{position:absolute;top:34%;left:29%;font-family:var(--serif);font-size:1.5em;color:var(--red-3);opacity:0}
+.sm-ghost{position:absolute;bottom:-6%;right:-2%;font-family:var(--mincho);font-size:9em;line-height:1;
+  color:rgba(237,228,211,.05);pointer-events:none}
+
+/* --- phone screen internals --- */
+.ph-head{padding:26px 12px 8px;text-align:center;border-bottom:1px solid rgba(237,228,211,.09)}
+.ph-head .code{font-size:8px;letter-spacing:.3em;color:var(--ink-dim)}
+.ph-head .me{font-family:var(--serif);font-size:12px;letter-spacing:.14em;margin-top:3px}
+.ph-q{padding:12px;font-family:var(--serif);font-size:11px;line-height:1.4;color:var(--ink-2);text-align:center}
+.ph-opts{display:flex;flex-direction:column;gap:7px;padding:0 12px}
+.ph-opt{padding:9px 10px;border-radius:8px;border:1px solid rgba(237,228,211,.14);font-size:10px;
+  letter-spacing:.12em;color:var(--ink-2);background:#201a1c;text-align:center}
+.ph-opt.pressed{background:var(--red);border-color:var(--red);color:#f0e7d5;font-weight:700;
+  animation:syncPress 6s ease infinite}
+.ph-streak{margin:10px 12px 0;text-align:center;font-size:8px;letter-spacing:.24em;color:var(--gold);
+  border:1px solid rgba(232,192,99,.3);border-radius:99px;padding:5px}
+.ph-belt{margin-top:auto;padding:10px 12px 14px}
+.ph-belt .lbl{font-size:7px;letter-spacing:.26em;color:var(--ink-dim);margin-bottom:5px;text-transform:uppercase}
+.ph-belt .bar{height:5px;border-radius:3px;background:rgba(237,228,211,.1);overflow:hidden}
+.ph-belt .fill{height:100%;width:66%;background:var(--b-yellow);border-radius:3px}
+/* sync thread */
+.sync-svg{position:absolute;inset:0;z-index:6;pointer-events:none;overflow:visible}
+.sync-dot{width:9px;height:9px;border-radius:50%;background:var(--gold);position:absolute;
+  box-shadow:0 0 12px rgba(232,192,99,.8);offset-path:path('M 760 430 C 640 380 520 320 420 250');
+  offset-rotate:0deg;animation:syncDot 6s ease-in-out infinite;opacity:0}
+.showcase .sm-plus{animation:syncPlus 6s ease infinite}
+@media(max-width:760px){.sync-dot{display:none}}
+.show-chips{display:flex;gap:14px;justify-content:center;flex-wrap:wrap;margin-top:70px}
+.show-chip{font-size:10px;letter-spacing:.26em;text-transform:uppercase;color:var(--ink-dim);
+  border:1px solid var(--ink-faint);border-radius:99px;padding:10px 18px}
+.sync-cap{text-align:center;color:var(--ink-dim);font-size:12px;font-style:italic;margin-top:16px}
+
+/* ============================================================ MEET */
+.meetsec{background:var(--bg)}
+.meet-window{max-width:900px;margin:56px auto 0;background:#0a0a0c;border:1px solid #232028;
+  border-radius:14px;overflow:hidden;box-shadow:0 30px 80px rgba(0,0,0,.55)}
+.meet-top{display:flex;align-items:center;gap:8px;padding:12px 16px;font-size:12px;color:#b7b3bd;
+  border-bottom:1px solid #1c1a20}
+.meet-top .dot3{display:flex;gap:6px;margin-right:8px}
+.meet-top .dot3 i{width:10px;height:10px;border-radius:50%;background:#2c2931;display:block}
+.meet-main{display:grid;grid-template-columns:1fr 150px;gap:10px;padding:12px}
+@media(max-width:700px){.meet-main{grid-template-columns:1fr}}
+.meet-share{position:relative;aspect-ratio:16/9;border-radius:8px;overflow:hidden;background:var(--stage)}
+.meetsec.in .meet-share{animation:presentWipe .8s ease .9s both}
+.present-pill{position:absolute;top:8px;left:8px;z-index:8;font-size:9px;letter-spacing:.18em;
+  text-transform:uppercase;color:#dfd8c9;background:rgba(168,35,42,.85);padding:4px 10px;border-radius:99px;opacity:0}
+.meetsec.in .present-pill{animation:fadeIn .4s ease 1.7s both}
+.meet-rail{display:flex;flex-direction:column;gap:10px}
+@media(max-width:700px){.meet-rail{flex-direction:row;flex-wrap:wrap}}
+.mthumb{position:relative;aspect-ratio:16/10;border-radius:8px;overflow:hidden;flex:1;min-width:90px;opacity:0}
+.meetsec.in .mthumb{animation:revealPop .5s ease var(--td) both}
+.mthumb .person{position:absolute;inset:0}
+.mthumb .person::before{content:'';position:absolute;left:50%;top:26%;width:32%;aspect-ratio:1;
+  transform:translateX(-50%);border-radius:50%;background:var(--skin)}
+.mthumb .person::after{content:'';position:absolute;left:50%;bottom:-14%;width:62%;aspect-ratio:1.6/1;
+  transform:translateX(-50%);border-radius:46% 46% 0 0;background:var(--shirt)}
+.mthumb .mn{position:absolute;left:6px;bottom:5px;font-size:8px;letter-spacing:.08em;color:rgba(255,255,255,.75);z-index:2}
+.mthumb.speaking{box-shadow:inset 0 0 0 2px var(--red-2)}
+.mthumb.speaking::after{content:'';position:absolute;inset:0;border-radius:8px;animation:speakRing 1.6s ease infinite}
+.meet-bar{display:flex;justify-content:center;gap:12px;padding:12px 0 16px}
+.mbtn{width:38px;height:38px;border-radius:50%;background:#1d1a21;display:flex;align-items:center;
+  justify-content:center;color:#b7b3bd}
+.mbtn svg{width:16px;height:16px}
+.mbtn.end{background:#a8232a;width:52px;border-radius:99px;color:#f6ecec}
+.meet-chat{position:absolute;right:14px;bottom:14px;z-index:9;display:flex;flex-direction:column;
+  gap:6px;align-items:flex-end;pointer-events:none}
+.chat-b{background:rgba(20,17,20,.92);border:1px solid rgba(237,228,211,.15);color:var(--ink-2);
+  font-size:11px;padding:7px 12px;border-radius:10px 10px 2px 10px;opacity:0;max-width:230px}
+.meetsec.in .chat-b.c1{animation:chatCycle 13.5s ease 2s infinite}
+.meetsec.in .chat-b.c2{animation:chatCycle 13.5s ease 6.5s infinite}
+.meetsec.in .chat-b.c3{animation:chatCycle 13.5s ease 11s infinite}
+.meet-note{text-align:center;color:var(--ink-dim);font-size:12px;font-style:italic;margin-top:18px}
+
+/* ============================================================ DRUMBEAT */
+.drumbeat{padding:34px 20px;text-align:center;background:var(--panel);
+  border-top:1px solid rgba(237,228,211,.06);border-bottom:1px solid rgba(237,228,211,.06);
+  font-family:var(--serif);letter-spacing:.4em;font-size:clamp(11px,1.6vw,14px);
+  text-transform:uppercase;color:var(--ink-dim)}
+.drumbeat .kanji{color:var(--red-3)}
+
+/* ============================================================ BELTS */
+.beltsec{background:var(--stage);position:relative}
+.belt-rail{display:flex;flex-direction:column;gap:13px;max-width:640px;margin:54px auto 0}
+.belt{height:26px;border-radius:4px;position:relative;transform-origin:left center;transform:scaleX(0);
+  box-shadow:0 4px 14px rgba(0,0,0,.4)}
+.belt::before{content:'';position:absolute;inset:0;border-radius:4px;
+  background:repeating-linear-gradient(90deg,transparent 0 34px,rgba(0,0,0,.12) 34px 36px)}
+.belt .knot{position:absolute;left:24px;top:50%;width:15px;height:15px;margin-top:-7.5px;
+  background:inherit;filter:brightness(.8);opacity:0;border-radius:2px}
+.belt .tag{position:absolute;right:12px;top:50%;transform:translateY(-50%);font-size:9px;
+  letter-spacing:.3em;text-transform:uppercase;mix-blend-mode:difference;color:#fff;opacity:.85}
+.beltsec.in .belt{animation:beltTie .5s cubic-bezier(.3,.7,.3,1) var(--td) both}
+.beltsec.in .belt .knot{animation:knotPop .4s ease calc(var(--td) + .4s) both}
+.belt-flash{position:absolute;inset:0;pointer-events:none;opacity:0;
+  background:radial-gradient(90% 90% at 50% 60%,transparent 55%,rgba(168,35,42,.5))}
+.beltsec.in .belt-flash{animation:vignetteFlash 1.6s ease 3.6s both}
+.belt-splat{position:absolute;width:30px;height:27px;border-radius:47% 53% 44% 56%/58% 43% 57% 42%;
+  background:var(--red);left:calc(50% + 290px);opacity:0}
+.beltsec.in .belt-splat{animation:splat 1s ease 3.5s both}
+.rank-row{display:flex;gap:26px;justify-content:center;flex-wrap:wrap;margin-top:56px}
+.rank{display:flex;flex-direction:column;align-items:center;gap:6px}
+.rank .kanji{font-size:26px;color:var(--ink-2)}
+.rank .rn{font-size:10px;letter-spacing:.28em;color:var(--ink-dim)}
+.rank.top .kanji{color:var(--gold)}
+
+/* ============================================================ LEADERBOARD DEMO */
+.lbsec{background:var(--bg)}
+.lb-frame{max-width:560px;margin:50px auto 0;background:var(--panel);border:1px solid rgba(237,228,211,.09);
+  border-radius:14px;padding:26px;position:relative;overflow:hidden}
+.lb-q{font-family:var(--serif);text-align:center;font-size:16px;min-height:44px;color:var(--ink-2);
+  transition:opacity .4s}
+.lb-q.swap{opacity:0}
+.lb-rows{position:relative;height:230px;margin-top:18px}
+.lb-row{position:absolute;left:0;right:0;height:40px;display:flex;align-items:center;gap:12px;
+  transition:top .8s cubic-bezier(.4,.1,.2,1);padding:0 8px}
+.lb-row .nm{font-size:11px;letter-spacing:.2em;text-transform:uppercase;color:var(--ink-2)}
+.lb-row .pts{margin-left:auto;font-family:var(--serif);font-size:17px;color:var(--ink);
+  font-variant-numeric:tabular-nums}
+.lb-row .gain{font-size:10px;color:var(--gold);letter-spacing:.1em;opacity:0;font-weight:700}
+.lb-row .gain.show{animation:chipPop 1.8s ease both}
+.lb-row.first .pts{color:var(--gold)}
+.lb-x2{position:absolute;inset:auto 0 0 0;top:0;display:flex;align-items:center;justify-content:center;
+  font-family:var(--serif);font-size:60px;color:var(--red-3);letter-spacing:.2em;background:rgba(15,12,14,.88);
+  opacity:0;pointer-events:none;transition:opacity .3s;z-index:5}
+.lb-x2.on{opacity:1}
+.lb-cap{text-align:center;font-size:12px;font-style:italic;color:var(--ink-dim);margin-top:16px}
+
+/* ============================================================ ENSO CTA */
+.enso-cta{min-height:88vh;display:flex;flex-direction:column;align-items:center;justify-content:center;
+  gap:26px;text-align:center;background:var(--stage);position:relative;padding:100px 20px}
+.enso-cta .ring{position:absolute;top:50%;left:50%;width:min(70vmin,560px);height:min(70vmin,560px);
+  transform:translate(-50%,-50%);pointer-events:none}
+.enso-cta .ring circle{fill:none;stroke:var(--red);stroke-linecap:round}
+.enso-cta.in .ring .ea{stroke-dasharray:430 490;animation:ensoDraw 1.8s ease-out both}
+.enso-cta.in .ring .eb{stroke-dasharray:290 478;opacity:.5;animation:ensoDraw2 1.8s ease-out .12s both}
+.enso-cta h2{font-size:clamp(24px,4.6vw,52px);letter-spacing:.24em;margin-left:.24em}
+.enso-cta .fine{font-size:11px;letter-spacing:.22em;text-transform:uppercase;color:var(--ink-dim)}
+
+/* ============================================================ HOW PAGE */
+.how-hero{padding:170px 24px 60px;text-align:center;background:var(--stage)}
+.scrollpaper-wrap{padding:0 16px 90px;background:var(--stage)}
+.scrollpaper{max-width:820px;margin:0 auto;background:var(--paper);color:var(--paper-ink);
+  border-radius:6px;position:relative;padding:80px clamp(24px,6vw,72px);
+  box-shadow:0 30px 90px rgba(0,0,0,.5)}
+.roll-cap{position:absolute;left:-14px;right:-14px;height:34px;border-radius:17px;
+  background:linear-gradient(#3a3136,#17131a 55%,#3a3136);box-shadow:0 6px 18px rgba(0,0,0,.5)}
+.roll-cap.top{top:-17px}.roll-cap.bot{bottom:-17px}
+.chapter{padding:44px 0;border-bottom:1px dashed rgba(34,28,30,.25)}
+.chapter:last-of-type{border-bottom:none}
+.chap-head{display:flex;align-items:center;gap:16px;margin-bottom:18px}
+.seal{width:44px;height:44px;flex:none;background:var(--red);color:#f2e9d8;border-radius:5px;
+  display:flex;align-items:center;justify-content:center;font-family:var(--mincho);font-size:20px;
+  transform:rotate(-2deg);box-shadow:2px 3px 0 rgba(34,28,30,.2)}
+.chapter h3{font-size:clamp(19px,2.6vw,26px);letter-spacing:.14em;color:var(--paper-ink)}
+.chapter p{max-width:58ch;color:#463c30;font-size:15.5px}
+.chapter .k-note{font-size:11px;letter-spacing:.24em;text-transform:uppercase;color:#8a7a5e}
+.code-demo{display:inline-flex;align-items:center;gap:12px;background:#221c1e;color:var(--ink);
+  border-radius:10px;padding:14px 22px;font-size:18px;letter-spacing:.3em;font-family:var(--serif);margin:14px 0}
+.code-demo .cursor{width:2px;height:20px;background:var(--red-2);animation:slowPulse 1s steps(2) infinite}
+.admit{font-family:var(--mincho);color:var(--red);border:2px solid var(--red);border-radius:4px;
+  padding:2px 8px;font-size:14px;transform:rotate(-4deg);display:inline-block;opacity:0}
+.chapter.in .admit{animation:stampIn .5s ease .9s both}
+.beats{display:flex;flex-direction:column;gap:26px;margin-top:24px}
+.beat{display:grid;grid-template-columns:52px 1fr;gap:16px;align-items:start;opacity:0}
+.chapter.in .beat{animation:fadeUp .6s ease var(--td) both}
+.beat .bn{font-family:var(--mincho);font-size:30px;color:var(--red);line-height:1.1}
+.beat h4{margin:0 0 6px;font-family:var(--serif);font-weight:400;font-size:17px;letter-spacing:.16em}
+.beat p{margin:0;font-size:14.5px}
+.reel-demo{margin-top:10px;height:26px;overflow:hidden;border-left:3px solid var(--red);padding-left:12px}
+.reel-demo ul{margin:0;padding:0;list-style:none;font-family:var(--serif);font-size:15px;
+  animation:reelUp 5s cubic-bezier(.2,.6,.3,1) infinite}
+.reel-demo li{height:26px;display:flex;align-items:center;color:#463c30}
+.unfurl-demo{display:flex;gap:10px;margin-top:12px;flex-wrap:wrap}
+.unfurl-demo .uc{background:#fff9ec;border:1px solid rgba(34,28,30,.2);border-radius:6px;
+  padding:10px 14px;font-size:12px;font-style:italic;color:#463c30;opacity:0}
+.chapter.in .uc{animation:flipIn .55s ease var(--td) both}
+.score-table{width:100%;border-collapse:collapse;margin-top:16px;font-size:14.5px}
+.score-table td{padding:11px 8px;border-bottom:1px solid rgba(34,28,30,.15)}
+.score-table td:last-child{text-align:right;font-family:var(--serif);font-size:17px;color:var(--red);
+  font-variant-numeric:tabular-nums;white-space:nowrap}
+.x2row{position:relative}
+.x2row .x2slash{position:absolute;left:-2%;right:-2%;top:50%;height:3px;border-radius:2px;
+  background:linear-gradient(90deg,transparent,var(--red-2),transparent);
+  transform-origin:left center;transform:rotate(-2deg) scaleX(0)}
+.chapter.in .x2row .x2slash{animation:slashAcross .6s ease .8s both}
+.chapter.in .x2row td:last-child{animation:cdPop .7s ease 1.2s both}
+.podium{display:flex;align-items:flex-end;gap:20px;justify-content:center;margin-top:28px}
+.pod{display:flex;flex-direction:column;align-items:center;gap:10px}
+.pod .plinth{width:76px;background:#221c1e;border-radius:4px 4px 0 0;display:flex;align-items:flex-start;
+  justify-content:center;padding-top:8px;color:var(--paper);font-family:var(--mincho);font-size:18px}
+.pod .medal{font-family:var(--mincho);font-size:15px;color:#f2e9d8;background:var(--red);width:28px;height:28px;
+  border-radius:50%;display:flex;align-items:center;justify-content:center;opacity:0}
+.chapter.in .pod .medal{animation:splat-in .5s ease var(--td) both}
+@keyframes splat-in{0%{opacity:0;transform:scale(0)}70%{transform:scale(1.2)}100%{opacity:1;transform:scale(1)}}
+.pod .pn{font-size:10px;letter-spacing:.2em;text-transform:uppercase;color:#463c30}
+
+/* ============================================================ PREMIUM */
+.prem-hero{padding:170px 24px 40px;text-align:center;background:var(--stage)}
+.founding{max-width:760px;margin:34px auto 0;border:1px solid rgba(232,192,99,.45);border-radius:12px;
+  padding:18px 26px;display:flex;gap:16px;align-items:center;justify-content:center;flex-wrap:wrap;
+  background:linear-gradient(120deg,rgba(232,192,99,.07),transparent)}
+.founding .kanji{color:var(--gold);font-size:22px}
+.founding p{margin:0;font-size:13.5px;color:var(--ink-2)}
+.founding b{color:var(--gold);font-weight:700}
+.paths{display:grid;grid-template-columns:1fr 1fr;gap:24px;max-width:900px;margin:60px auto 0;align-items:stretch}
+@media(max-width:760px){.paths{grid-template-columns:1fr}}
+.path{background:var(--panel);border:1px solid rgba(237,228,211,.1);border-radius:16px;padding:38px 34px;
+  display:flex;flex-direction:column;gap:20px;position:relative}
+.path.sensei{border-color:rgba(232,192,99,.4);box-shadow:0 0 60px rgba(232,192,99,.06)}
+.path .p-kanji{font-family:var(--mincho);font-size:34px;color:var(--red-3);line-height:1}
+.path.sensei .p-kanji{color:var(--gold)}
+.path h3{font-size:15px;letter-spacing:.3em;font-family:var(--sans);font-weight:700;text-transform:uppercase}
+.path .price{font-family:var(--serif);font-size:52px;line-height:1;color:var(--ink)}
+.path .price small{font-size:15px;color:var(--ink-dim);letter-spacing:.06em}
+.path .annual{font-size:12px;color:var(--ink-dim);font-style:italic}
+.path ul{list-style:none;margin:6px 0 0;padding:0;display:flex;flex-direction:column;gap:12px}
+.path li{display:flex;gap:12px;font-size:14px;color:var(--ink-2);align-items:flex-start}
+.path li::before{content:'刃';font-family:var(--mincho);color:var(--red-3);font-size:12px;margin-top:2px}
+.path.sensei li::before{color:var(--gold)}
+.path li b{color:var(--ink)}
+.path .btn{margin-top:auto;justify-content:center}
+.license-seal{position:absolute;top:-15px;right:22px;background:var(--red);color:#f2e9d8;
+  font-family:var(--mincho);font-size:11px;padding:7px 10px;border-radius:4px;transform:rotate(3deg);
+  letter-spacing:.2em;box-shadow:0 6px 18px rgba(0,0,0,.4)}
+.value-line{max-width:760px;margin:56px auto 0;text-align:center;font-family:var(--serif);
+  font-size:clamp(17px,2.4vw,23px);color:var(--ink-2);line-height:1.6}
+.value-line b{color:var(--red-3);font-weight:400}
+.guarantee{text-align:center;margin-top:18px;font-size:12px;letter-spacing:.2em;text-transform:uppercase;color:var(--ink-dim)}
+.hr-strip{display:grid;grid-template-columns:repeat(3,1fr);gap:20px;max-width:900px;margin:70px auto 0}
+@media(max-width:700px){.hr-strip{grid-template-columns:1fr}}
+.hr-cell{border-top:2px solid var(--red);padding-top:16px;font-size:14px;color:var(--ink-2)}
+.hr-cell b{display:block;font-size:11px;letter-spacing:.26em;text-transform:uppercase;color:var(--ink);margin-bottom:8px}
+.faq{max-width:720px;margin:80px auto 0}
+.faq h2{text-align:center;margin-bottom:30px}
+.faq details{background:var(--paper);color:var(--paper-ink);border-radius:8px;margin-bottom:12px;overflow:hidden}
+.faq summary{cursor:pointer;padding:18px 22px;font-family:var(--serif);font-size:16px;letter-spacing:.04em;
+  list-style:none;display:flex;align-items:center;gap:14px}
+.faq summary::-webkit-details-marker{display:none}
+.faq summary::before{content:'巻';font-family:var(--mincho);color:var(--red);font-size:14px;transition:transform .3s}
+.faq details[open] summary::before{transform:rotate(90deg)}
+.faq .fa{padding:0 22px 20px 52px;font-size:14px;color:#463c30;max-width:60ch}
+
+/* ============================================================ FOOTER */
+footer{background:var(--panel);position:relative;padding:90px 24px 0;margin-top:0}
+.torn{position:absolute;top:-1px;left:0;right:0;height:16px;color:var(--bg)}
+.foot-big{text-align:center;display:flex;flex-direction:column;align-items:center;gap:22px;margin-bottom:70px}
+.foot-big h2{font-size:clamp(20px,3.6vw,38px);letter-spacing:.26em;margin-left:.26em}
+.foot-cols{display:grid;grid-template-columns:repeat(3,1fr);gap:30px;max-width:900px;margin:0 auto 60px}
+@media(max-width:640px){.foot-cols{grid-template-columns:1fr}}
+.foot-cols h4{font-size:10px;letter-spacing:.3em;text-transform:uppercase;color:var(--ink-dim);margin:0 0 14px}
+.foot-cols a,.foot-cols p{display:block;font-size:13px;color:var(--ink-2);text-decoration:none;margin:0 0 9px}
+.foot-cols a:hover{color:var(--red-4)}
+.foot-base{display:flex;align-items:center;gap:16px;justify-content:center;padding:26px 0 30px;
+  border-top:1px solid rgba(237,228,211,.07);font-size:10px;letter-spacing:.24em;text-transform:uppercase;
+  color:var(--ink-dim);flex-wrap:wrap;text-align:center}
+.belt-strip{display:flex;height:4px;width:100%}
+.belt-strip i{flex:1}
+
+/* ============================================================ REDUCED MOTION */
+@media (prefers-reduced-motion: reduce){
+  *{animation-duration:.001ms!important;animation-delay:0ms!important;animation-iteration-count:1!important;
+    transition-duration:.001ms!important}
+  .rv{opacity:1;transform:none}
+  .vchip,.disc-card,.beat,.uc,.mthumb,.chat-b,.admit,.pod .medal{opacity:1}
+  .belt{transform:scaleX(1)}.belt .knot{opacity:1}
+  .cut-half.t,.cut-half.b{opacity:0}.cut-reveal{opacity:1}.cut-reveal .plus{opacity:1}
+  .t-ghost-t,.t-ghost-b{opacity:0}
+  .sync-dot{display:none}
+  .hero .enso-a{stroke-dasharray:430 490;stroke-dashoffset:0}
+  .hero .enso-b{stroke-dasharray:290 478;stroke-dashoffset:0;opacity:.5}
+}
+</style>
+
+<div class="noise"></div>
+
+<nav>
+  <a class="nav-mark" href="#/" data-nav-home>
+    <svg viewBox="0 0 200 200"><circle cx="100" cy="100" r="78" transform="rotate(-75 100 100)" style="fill:none;stroke:#a8232a;stroke-width:14;stroke-linecap:round;stroke-dasharray:430 490"/></svg>
+    <span>SOCIAL SAMURAI</span>
+  </a>
+  <div class="nav-links">
+    <a href="#/how" data-nav="how">How It Works</a>
+    <a href="#/premium" data-nav="premium">Premium</a>
+  </div>
+  <a class="btn nav-cta" id="navCta" href="https://social-samurai.netlify.app" target="_blank" rel="noopener">Try Free <span class="seal">侍</span></a>
+</nav>
+
+<main>
+
+<!-- ================================================================ HOME -->
+<section class="page active" data-page="home">
+
+  <!-- H1 · THE ENSO GATE -->
+  <div class="hero armed" id="hero">
+    <div class="watermark kanji">侍</div>
+    <div class="splat-dot s1"></div><div class="splat-dot s2"></div>
+    <div class="hero-core">
+      <div class="enso-mark">
+        <svg class="hero-enso" viewBox="0 0 200 200" aria-hidden="true">
+          <circle class="enso-a" cx="100" cy="100" r="78" transform="rotate(-75 100 100)" stroke-width="9"/>
+          <circle class="enso-b" cx="100" cy="101" r="75" transform="rotate(-40 100 100)" stroke-width="3.5"/>
+        </svg>
+        <span class="mk">侍</span>
+      </div>
+      <p class="kicker rv in">The ink-wash party game for remote teams</p>
+      <h1 class="h-xl">SOCIAL SAMURAI<span class="seal-stamp">侍</span></h1>
+      <p class="sub">How well do you know your team? Thirty minutes, one screen share, and you&rsquo;ll find out.</p>
+      <div class="hero-ctas">
+        <a class="btn" href="https://social-samurai.netlify.app" target="_blank" rel="noopener">Enter the Dojo — Free</a>
+        <a class="btn ghost" href="#/how">Learn the Forms</a>
+      </div>
+      <p class="hero-meta">5–15 players &nbsp;·&nbsp; runs in Google Meet &nbsp;·&nbsp; zero prep for players</p>
+    </div>
+    <svg class="fighter fl" viewBox="0 0 100 110" style="--hx:67px;--hy:37px">
+      <ellipse cx="50" cy="24" rx="19" ry="6" fill="#54432f"/><circle cx="50" cy="28" r="9" fill="#e2d5bd"/>
+      <rect x="34" y="30" width="32" height="5" rx="2.5" fill="#a8232a"/>
+      <path d="M50 38 l0 26 M50 64 l-13 25 M50 64 l13 25 M50 44 l-19 9 M50 44 l17 -7" stroke="#5b5470" stroke-width="7" fill="none" stroke-linecap="round"/>
+      <g class="sword"><line x1="67" y1="37" x2="92" y2="10" stroke="#e9dfcc" stroke-width="3.5" stroke-linecap="round"/><circle cx="67" cy="37" r="2.6" fill="#a8232a"/></g>
+      <path class="arc" d="M 20 78 Q 56 8 96 22" fill="none" stroke="#c9303a" stroke-width="3"/>
+    </svg>
+    <svg class="fighter fr" viewBox="0 0 100 110" style="--hx:70px;--hy:39px">
+      <ellipse cx="50" cy="24" rx="19" ry="6" fill="#54432f"/><circle cx="50" cy="28" r="9" fill="#e2d5bd"/>
+      <rect x="34" y="30" width="32" height="5" rx="2.5" fill="#a8232a"/>
+      <path d="M50 38 l0 26 M50 64 l-11 26 M50 64 l15 24 M50 43 l-18 12 M50 43 l20 -4" stroke="#5b5470" stroke-width="7" fill="none" stroke-linecap="round"/>
+      <g class="sword"><line x1="70" y1="39" x2="96" y2="52" stroke="#e9dfcc" stroke-width="3.5" stroke-linecap="round"/><circle cx="70" cy="39" r="2.6" fill="#a8232a"/></g>
+      <path class="arc" d="M 20 78 Q 56 8 96 22" fill="none" stroke="#c9303a" stroke-width="3"/>
+    </svg>
+    <div class="scroll-cue kanji">下</div>
+  </div>
+
+  <!-- H2 · THE COLD GRID -->
+  <section class="blk coldgrid rv-sec" id="coldgrid">
+    <div class="wrap" style="text-align:center">
+      <p class="kicker rv">The problem</p>
+      <h2 class="h-lg rv d1">&ldquo;You&rsquo;ve worked together for a year.<br>You know their Wi-Fi quality. Not their story.&rdquo;</h2>
+      <p class="sub rv d2" style="margin:22px auto 0">Remote work made teammates into thumbnails. Social Samurai turns the thumbnails back into people.</p>
+      <div class="grid9-wrap">
+        <svg class="threads" viewBox="0 0 300 220" preserveAspectRatio="none">
+          <line x1="50" y1="37" x2="150" y2="110" style="--td:3.2s"/><line x1="250" y1="37" x2="150" y2="110" style="--td:3.4s"/>
+          <line x1="50" y1="183" x2="150" y2="110" style="--td:3.6s"/><line x1="250" y1="183" x2="150" y2="110" style="--td:3.8s"/>
+          <line x1="50" y1="37" x2="250" y2="37" style="--td:4s"/><line x1="50" y1="183" x2="250" y2="183" style="--td:4.2s"/>
+          <line x1="50" y1="37" x2="50" y2="183" style="--td:4.4s"/><line x1="250" y1="37" x2="250" y2="183" style="--td:4.6s"/>
+        </svg>
+        <div class="grid9" id="grid9"></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- H3a · THE SCROLL + katana cut -->
+  <section class="blk form-blk rv-sec">
+    <div class="watermark kanji">巻物</div>
+    <div class="wrap form-grid">
+      <div>
+        <p class="kicker red rv">Everyone answers. Then the guessing begins.</p>
+        <h2 class="h-lg rv d1">THE SCROLL <span class="kanji" style="color:var(--red-3)">巻物</span></h2>
+        <p class="body-c rv d2" style="margin-top:18px">One answer appears on the big screen. Whose is it? Strike true for <b style="color:var(--red-3)">+100</b> — then run the Gauntlet and match the rest, +50 each.</p>
+        <p class="microtag rv d3" style="margin-top:22px">Keep scrolling. The blade is drawn. ↓</p>
+      </div>
+      <div class="rv d2" style="display:flex;justify-content:center">
+        <div style="max-width:340px;background:rgba(255,255,255,.02);border:1px solid var(--ink-faint);border-radius:12px;padding:24px">
+          <p class="microtag" style="margin:0 0 12px">A real prompt from the bank</p>
+          <p style="font-family:var(--serif);font-size:19px;margin:0;line-height:1.4">&ldquo;A niche topic you know way too much about.&rdquo;</p>
+          <p style="font-style:italic;color:var(--ink-dim);font-size:13px;margin:14px 0 0">&ldquo;the history of ballpoint pens&rdquo; &nbsp;·&nbsp; &ldquo;competitive rhythm-game scoring&rdquo;</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- SIGNATURE MOMENT 2 · THE KATANA-CUT CARD -->
+  <div class="cutzone" id="cutzone">
+    <div class="cutstick">
+      <div class="cut-card">
+        <div class="cut-reveal">
+          <div class="ava breathe" data-k="7" style="width:74px;height:74px;box-shadow:inset 0 0 0 3px var(--gold)"></div>
+          <div class="who">It was Priya. Obviously it was Priya.</div>
+          <div class="plus">+100</div>
+        </div>
+        <div class="cut-half t"><div class="paper-face">
+          <span class="q-tag">The Strike · one guess</span>
+          <span class="q">&ldquo;Your emergency 10-minute meal when you can&rsquo;t be bothered.&rdquo;</span>
+          <span class="a">&ldquo;instant noodles + one egg. always one egg.&rdquo;</span>
+        </div></div>
+        <div class="cut-half b"><div class="paper-face">
+          <span class="q-tag">The Strike · one guess</span>
+          <span class="q">&ldquo;Your emergency 10-minute meal when you can&rsquo;t be bothered.&rdquo;</span>
+          <span class="a">&ldquo;instant noodles + one egg. always one egg.&rdquo;</span>
+        </div></div>
+        <div class="cut-slash"></div>
+      </div>
+      <p class="cut-hint">One answer · one guess · one cut</p>
+    </div>
+  </div>
+
+  <!-- H3b · THE COUNCIL -->
+  <section class="blk form-blk alt rv-sec">
+    <div class="watermark kanji">評定</div>
+    <div class="wrap form-grid">
+      <div class="council-demo">
+        <div class="vote-chips">
+          <span class="vchip heart"><span class="kanji">心</span> Heart pick · decides the honour</span>
+          <span class="vchip crowd"><span class="kanji">衆</span> Crowd pick · where the points live</span>
+        </div>
+        <div class="council-row" style="position:relative">
+          <svg class="council-svg" viewBox="0 0 400 90" preserveAspectRatio="none">
+            <path class="p1" d="M 30 10 C 100 60, 180 70, 214 62"/>
+            <path class="p2" d="M 380 10 C 320 60, 250 70, 218 62"/>
+          </svg>
+          <div class="cand"><div class="ava" data-k="1" style="width:52px;height:52px"></div><span class="nm">Kenji</span></div>
+          <div class="cand"><div class="ava" data-k="4" style="width:52px;height:52px"></div><span class="nm">Mara</span></div>
+          <div class="cand winner"><div class="ava" data-k="9" style="width:64px;height:64px"></div><span class="nm">Dev</span></div>
+          <div class="cand"><div class="ava" data-k="12" style="width:52px;height:52px"></div><span class="nm">Sol</span></div>
+          <div class="cand"><div class="ava" data-k="6" style="width:52px;height:52px"></div><span class="nm">Ana</span></div>
+        </div>
+      </div>
+      <div>
+        <p class="kicker red rv">Vote with your heart. Predict the crowd.</p>
+        <h2 class="h-lg rv d1">THE COUNCIL <span class="kanji" style="color:var(--red-3)">評定</span></h2>
+        <p class="body-c rv d2" style="margin-top:18px">&ldquo;Who would win a game before anyone finished explaining the rules?&rdquo; Honour a teammate with your heart pick — and win points by reading the room. <b style="color:var(--red-3)">+100</b> if you called it.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- H4 · SIX DISCIPLINES -->
+  <section class="blk disc rv-sec" id="disc">
+    <div class="wrap" style="text-align:center">
+      <p class="kicker rv">Built for the way teams actually meet</p>
+      <h2 class="h-lg rv d1">THE SIX DISCIPLINES</h2>
+      <div class="disc-grid">
+        <div class="disc-card" style="--td:.1s"><span class="glyph">主</span><h3>One host, zero prep</h3><p>One admin opens the Dojo Stage. Everyone else just types a code.</p></div>
+        <div class="disc-card" style="--td:.2s"><span class="glyph">認</span><h3>Work-approved, all 100</h3><p>Every prompt stress-tested. No politics, no religion, nothing that gets forwarded to HR — this IS the HR event.</p></div>
+        <div class="disc-card" style="--td:.3s"><span class="glyph">続</span><h3>Honour persists</h3><p>Stats and honour carry across sessions. Your black belt is earned, not reset.</p></div>
+        <div class="disc-card" style="--td:.4s"><span class="glyph">式</span><h3>The ceremony</h3><p>Gold 金, silver 銀, bronze 銅 — real prizes, real applause, every single game.</p></div>
+        <div class="disc-card" style="--td:.5s"><span class="glyph">逆</span><h3>Nobody&rsquo;s ever out</h3><p>Final rounds score ×2. The quiet analyst can still take the crown.</p></div>
+        <div class="disc-card" style="--td:.6s"><span class="glyph">刃</span><h3>Host controls the blade</h3><p>Reroll or redraft any question live. You know your team; the game listens.</p></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- SIGNATURE MOMENT 3 · LIVING LEADERBOARD -->
+  <section class="blk lbsec rv-sec">
+    <div class="wrap" style="text-align:center">
+      <p class="kicker rv">Watch a dojo breathe</p>
+      <h2 class="h-lg rv d1">THE HONOUR NEVER SITS STILL</h2>
+      <div class="lb-frame rv d2">
+        <div class="lb-q" id="lbQ">&ldquo;What was the very first job you ever did, paid or not?&rdquo;</div>
+        <div class="lb-rows" id="lbRows"></div>
+        <div class="lb-x2" id="lbX2">×2</div>
+      </div>
+      <p class="lb-cap rv d3">An actual round takes about 90 seconds. This one plays itself.</p>
+    </div>
+  </section>
+
+  <!-- H5 · TWO SCREENS ONE DOJO -->
+  <section class="blk showcase rv-sec">
+    <div class="wrap" style="text-align:center">
+      <p class="kicker rv">The host holds the stage. The players hold the blade.</p>
+      <h2 class="h-lg rv d1">TWO SCREENS, ONE DOJO</h2>
+      <div class="devices rv d2">
+        <div class="laptop">
+          <div class="lid"><div class="lap-screen">
+            <div class="stage-mini">
+              <div class="sm-ghost">道</div>
+              <div class="sm-top">Round 4 <span class="kanji">巻物</span> The Scroll</div>
+              <div class="sm-card">
+                <div class="q">&ldquo;What was the very first job you ever did, paid or not?&rdquo;</div>
+                <div class="a">&ldquo;dishwasher at my uncle&rsquo;s restaurant&rdquo;</div>
+              </div>
+              <div class="sm-ava breathe" data-k="1" style="top:14%;left:16%"></div>
+              <div class="sm-ava breathe" data-k="3" style="top:39%;left:8%;animation-delay:.6s"></div>
+              <div class="sm-ava breathe" data-k="5" style="top:66%;left:14%;animation-delay:1.2s"></div>
+              <div class="sm-ava breathe" data-k="7" style="top:82%;left:34%;animation-delay:.3s"></div>
+              <div class="sm-ava breathe" data-k="9" style="top:82%;left:55%;animation-delay:.9s"></div>
+              <div class="sm-ava breathe" data-k="11" style="top:14%;left:36%;animation-delay:1.5s"></div>
+              <div class="sm-ava breathe" data-k="13" style="top:14%;left:56%;animation-delay:.45s"></div>
+              <div class="sm-ava breathe" data-k="2" style="top:60%;left:66%;animation-delay:1.8s"></div>
+              <div class="sm-rail">
+                <div class="r"><span class="dot" style="background:var(--b-green)"></span>Dev<b>640</b></div>
+                <div class="r"><span class="dot" style="background:var(--b-yellow)"></span>Mara<b>590</b></div>
+                <div class="r"><span class="dot" style="background:var(--b-yellow)"></span>Kenji<b>430</b></div>
+                <div class="r"><span class="dot" style="background:var(--b-orange)"></span>Sol<b>380</b></div>
+                <div class="r"><span class="dot" style="background:var(--b-white)"></span>Ana<b>210</b></div>
+              </div>
+              <div class="sm-count"><span class="ring"></span>0:12</div>
+              <div class="sm-plus">+100</div>
+              <div class="vig"></div>
+            </div>
+          </div></div>
+          <div class="deck"></div>
+        </div>
+        <div class="phone">
+          <div class="shell"><div class="notch"></div><div class="ph-screen">
+            <div class="ph-head"><div class="code">DOJO-88</div><div class="me">MARA <span class="kanji" style="color:var(--red-3)">鞠</span></div></div>
+            <div class="ph-q">Whose answer is on the stage?</div>
+            <div class="ph-opts">
+              <div class="ph-opt">KENJI</div>
+              <div class="ph-opt pressed">DEV</div>
+              <div class="ph-opt">SOL</div>
+              <div class="ph-opt">ANA</div>
+            </div>
+            <div class="ph-streak">PERFECT FORM ×3 · +25</div>
+            <div class="ph-belt"><div class="lbl">Yellow belt · 80/120 honour</div><div class="bar"><div class="fill"></div></div></div>
+          </div></div>
+        </div>
+        <div class="sync-dot"></div>
+      </div>
+      <p class="sync-cap">Realtime to the millisecond — the phone strikes, the stage answers.</p>
+      <div class="show-chips rv d3">
+        <span class="show-chip">5–15 players</span>
+        <span class="show-chip">Phone or laptop</span>
+        <span class="show-chip">Nothing to install</span>
+      </div>
+    </div>
+  </section>
+
+  <!-- H6 · GOOGLE MEET -->
+  <section class="blk meetsec rv-sec" id="meetsec">
+    <div class="wrap" style="text-align:center">
+      <p class="kicker rv">No new tool. No new tab for players.</p>
+      <h2 class="h-lg rv d1">RUNS INSIDE GOOGLE MEET</h2>
+      <p class="sub rv d2" style="margin:20px auto 0">The host shares the Dojo Stage like any other tab. Players keep their phones in hand. That&rsquo;s the whole setup — if your team can join a stand-up, they can join a dojo.</p>
+      <div class="meet-window rv d3">
+        <div class="meet-top"><span class="dot3"><i></i><i></i><i></i></span> weekly-team-social</div>
+        <div class="meet-main">
+          <div class="meet-share">
+            <div class="present-pill">Presenting · Dojo Stage</div>
+            <div class="stage-mini">
+              <div class="sm-ghost">道</div>
+              <div class="sm-top">Round 7 <span class="kanji">評定</span> The Council</div>
+              <div class="sm-card">
+                <div class="q">&ldquo;Who would remember your name and one detail after meeting you once?&rdquo;</div>
+              </div>
+              <div class="sm-ava breathe" data-k="4" style="top:16%;left:14%"></div>
+              <div class="sm-ava breathe" data-k="8" style="top:44%;left:7%;animation-delay:.7s"></div>
+              <div class="sm-ava breathe" data-k="10" style="top:72%;left:15%;animation-delay:1.4s"></div>
+              <div class="sm-ava breathe" data-k="14" style="top:80%;left:38%;animation-delay:.35s"></div>
+              <div class="sm-rail">
+                <div class="r"><span class="dot" style="background:var(--b-green)"></span>Dev<b>820</b></div>
+                <div class="r"><span class="dot" style="background:var(--b-yellow)"></span>Mara<b>790</b></div>
+                <div class="r"><span class="dot" style="background:var(--b-yellow)"></span>Kenji<b>610</b></div>
+                <div class="r"><span class="dot" style="background:var(--b-orange)"></span>Sol<b>540</b></div>
+                <div class="r"><span class="dot" style="background:var(--b-white)"></span>Ana<b>390</b></div>
+              </div>
+              <div class="vig"></div>
+            </div>
+            <div class="meet-chat">
+              <div class="chat-b c1">NO WAY that&rsquo;s Dev&rsquo;s answer</div>
+              <div class="chat-b c2">THE GAUNTLET 😤</div>
+              <div class="chat-b c3">rematch next friday. calendar it.</div>
+            </div>
+          </div>
+          <div class="meet-rail">
+            <div class="mthumb" style="--td:.15s;--skin:#c9a284;--shirt:#4e6a86;background:#17151b"><div class="person"></div><span class="mn">Kenji</span></div>
+            <div class="mthumb speaking" style="--td:.3s;--skin:#8a5c3f;--shirt:#5c7a4e;background:#1b1618"><div class="person"></div><span class="mn">Priya (laughing)</span></div>
+            <div class="mthumb" style="--td:.45s;--skin:#e0b48e;--shirt:#6b4a38;background:#141118"><div class="person"></div><span class="mn">Dev</span></div>
+            <div class="mthumb" style="--td:.6s;--skin:#b98a68;--shirt:#3a3226;background:#181419"><div class="person"></div><span class="mn">Sol</span></div>
+            <div class="mthumb" style="--td:.75s;--skin:#d9a98c;--shirt:#52646a;background:#151517"><div class="person"></div><span class="mn">Ana</span></div>
+          </div>
+        </div>
+        <div class="meet-bar">
+          <span class="mbtn"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 14a3 3 0 0 0 3-3V5a3 3 0 0 0-6 0v6a3 3 0 0 0 3 3zm5-3a5 5 0 0 1-10 0H5a7 7 0 0 0 6 6.92V21h2v-3.08A7 7 0 0 0 19 11z"/></svg></span>
+          <span class="mbtn"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M17 10.5V7a1 1 0 0 0-1-1H4a1 1 0 0 0-1 1v10a1 1 0 0 0 1 1h12a1 1 0 0 0 1-1v-3.5l4 4v-11z"/></svg></span>
+          <span class="mbtn"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M20 18c1.1 0 2-.9 2-2V6a2 2 0 0 0-2-2H4a2 2 0 0 0-2 2v10c0 1.1.9 2 2 2H0v2h24v-2h-4zM4 6h16v10H4V6z"/></svg></span>
+          <span class="mbtn end"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 9c-1.6 0-3.15.25-4.6.72v3.1c0 .39-.23.74-.56.9-.98.49-1.87 1.12-2.66 1.85-.18.18-.43.29-.7.29-.28 0-.53-.11-.71-.29L.29 13.08c-.18-.17-.29-.42-.29-.7 0-.28.11-.53.29-.71C3.34 8.78 7.46 7 12 7s8.66 1.78 11.71 4.67c.18.18.29.43.29.71 0 .28-.11.53-.29.7l-2.48 2.49c-.18.18-.43.29-.71.29-.27 0-.52-.11-.7-.29-.79-.73-1.68-1.36-2.66-1.85-.33-.16-.56-.51-.56-.9v-3.1C15.15 9.25 13.6 9 12 9z"/></svg></span>
+        </div>
+      </div>
+      <p class="meet-note">Works the same in Zoom and Teams. The Stage is just a browser tab — share it anywhere.</p>
+    </div>
+  </section>
+
+  <!-- drumbeat -->
+  <div class="drumbeat">Are you a Social Samurai<span class="kanji">?</span></div>
+
+  <!-- H7 · BELTS -->
+  <section class="blk beltsec rv-sec" id="beltsec">
+    <div class="belt-flash"></div>
+    <div class="wrap" style="text-align:center;position:relative">
+      <p class="kicker rv">Progression that outlives the meeting</p>
+      <h2 class="h-lg rv d1">EARN YOUR BELT.</h2>
+      <p class="sub rv d2" style="margin:20px auto 0">Every 120 honour, a new belt. Every game, a ceremony. SHOGUN <span class="kanji">将軍</span> takes the gold — RONIN <span class="kanji">浪人</span> trains for next time.</p>
+      <div class="belt-rail">
+        <div class="belt" style="--td:.2s;background:linear-gradient(180deg,#f2ead9,#ddd2bc)"><span class="knot"></span><span class="tag">White</span></div>
+        <div class="belt" style="--td:.65s;background:linear-gradient(180deg,#d6b458,#b8983f)"><span class="knot"></span><span class="tag">Yellow</span></div>
+        <div class="belt" style="--td:1.1s;background:linear-gradient(180deg,#bd7739,#9c5e2c)"><span class="knot"></span><span class="tag">Orange</span></div>
+        <div class="belt" style="--td:1.55s;background:linear-gradient(180deg,#648457,#4f6a43)"><span class="knot"></span><span class="tag">Green</span></div>
+        <div class="belt" style="--td:2s;background:linear-gradient(180deg,#567592,#435d77)"><span class="knot"></span><span class="tag">Blue</span></div>
+        <div class="belt" style="--td:2.45s;background:linear-gradient(180deg,#755241,#5b3f30)"><span class="knot"></span><span class="tag">Brown</span></div>
+        <div class="belt" style="--td:2.9s;background:linear-gradient(180deg,#2e2825,#1b1715)"><span class="knot"></span><span class="tag">Black</span></div>
+      </div>
+      <div class="belt-splat"></div>
+      <div class="rank-row rv d3">
+        <div class="rank top"><span class="kanji">将軍</span><span class="rn">Shogun · 1st</span></div>
+        <div class="rank"><span class="kanji">先生</span><span class="rn">Sensei · 2nd–3rd</span></div>
+        <div class="rank"><span class="kanji">弟子</span><span class="rn">Student</span></div>
+        <div class="rank"><span class="kanji">浪人</span><span class="rn">Ronin</span></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- H8 · FINAL CTA -->
+  <section class="enso-cta rv-sec">
+    <svg class="ring" viewBox="0 0 200 200" aria-hidden="true">
+      <circle class="ea" cx="100" cy="100" r="78" transform="rotate(-75 100 100)" stroke-width="9"/>
+      <circle class="eb" cx="100" cy="101" r="75" transform="rotate(-40 100 100)" stroke-width="3.5"/>
+    </svg>
+    <h2 class="rv">ARE YOU A SOCIAL SAMURAI?</h2>
+    <p class="sub rv d1">Free for your first dojo. Your team joins in ten seconds.</p>
+    <a class="btn rv d2" href="https://social-samurai.netlify.app" target="_blank" rel="noopener">Enter the Dojo <span class="seal">侍</span></a>
+    <p class="fine rv d3">No installs · no accounts for players · DOJO-88 and go</p>
+  </section>
+</section>
+
+<!-- ================================================================ HOW -->
+<section class="page" data-page="how">
+  <div class="how-hero">
+    <p class="kicker">Learn the forms</p>
+    <h1 class="h-xl" style="font-size:clamp(26px,5vw,52px)">HOW IT WORKS</h1>
+    <p class="sub" style="margin:20px auto 0">One training scroll. Five chapters. By the end, you could host tonight.</p>
+  </div>
+  <div class="scrollpaper-wrap">
+    <div class="scrollpaper">
+      <div class="roll-cap top"></div>
+
+      <div class="chapter rv-sec">
+        <div class="chap-head"><span class="seal">壱</span><h3>RAISE THE STAGE</h3></div>
+        <p>The host opens the <b>Dojo Stage</b> — a 16:9 arena built to be screenshared. Players scan in with a dojo code on any phone or laptop. No installs, no player accounts.</p>
+        <div class="code-demo"><span id="codeType">DOJO-88</span><span class="cursor"></span></div>
+        <span class="admit">入門 · admitted</span>
+        <p class="k-note" style="margin-top:16px">The host sets rounds, timer, and question sheet in the Sensei&rsquo;s Console — reroll anything.</p>
+      </div>
+
+      <div class="chapter rv-sec">
+        <div class="chap-head"><span class="seal">弐</span><h3>THE SCROLL <span class="kanji" style="color:var(--red)">巻物</span></h3></div>
+        <div class="beats">
+          <div class="beat" style="--td:.15s"><span class="bn">一</span><div>
+            <h4>THE STRIKE</h4><p>One answer on the stage. Guess whose it is. <b>+100.</b></p>
+            <div class="reel-demo"><ul>
+              <li>KENJI?</li><li>MARA?</li><li>DEV?</li><li>SOL?</li><li>ANA?</li>
+              <li>KENJI?</li><li>MARA?</li><li>DEV?</li><li>SOL?</li><li>ANA?</li>
+            </ul></div>
+          </div></div>
+          <div class="beat" style="--td:.4s"><span class="bn">二</span><div>
+            <h4>THE GAUNTLET</h4><p>Match every remaining answer to its author. <b>+50 each — ×1.6 if your Strike landed.</b></p>
+          </div></div>
+          <div class="beat" style="--td:.65s"><span class="bn">三</span><div>
+            <h4>THE UNFURLING</h4><p>Every answer revealed, one by one. This is where the &ldquo;wait, THAT was you?!&rdquo; happens.</p>
+            <div class="unfurl-demo">
+              <span class="uc" style="--td:1s">&ldquo;night shift at a corner shop&rdquo;</span>
+              <span class="uc" style="--td:1.2s">&ldquo;I can braid hair one-handed&rdquo;</span>
+              <span class="uc" style="--td:1.4s">&ldquo;an anime opening from 2004&rdquo;</span>
+            </div>
+          </div></div>
+        </div>
+      </div>
+
+      <div class="chapter rv-sec">
+        <div class="chap-head"><span class="seal">参</span><h3>THE COUNCIL <span class="kanji" style="color:var(--red)">評定</span></h3></div>
+        <p>Two votes, cast from your phone: <span class="kanji" style="color:var(--red)">心</span> your <b>heart pick</b> honours a teammate; <span class="kanji" style="color:var(--red)">衆</span> your <b>crowd pick</b> predicts who the room chooses. Read your team right: <b>+100.</b></p>
+        <p style="font-style:italic">&ldquo;Who would survive a week off-grid?&rdquo; The honoured samurai takes a bow on the big screen.</p>
+      </div>
+
+      <div class="chapter rv-sec">
+        <div class="chap-head"><span class="seal">四</span><h3>HONOUR &amp; FORM</h3></div>
+        <table class="score-table">
+          <tr><td>The Strike — guess the author</td><td>+100</td></tr>
+          <tr><td>The Gauntlet — match the rest</td><td>+50 each · ×1.6</td></tr>
+          <tr><td>The Council — read the room</td><td>+100</td></tr>
+          <tr><td>Perfect form — every correct round in a row</td><td>+25</td></tr>
+          <tr class="x2row"><td>The final third of rounds<span class="x2slash"></span></td><td>×2</td></tr>
+        </table>
+        <p style="margin-top:16px;font-style:italic">Nobody is ever out of it.</p>
+      </div>
+
+      <div class="chapter rv-sec">
+        <div class="chap-head"><span class="seal">五</span><h3>THE CEREMONY</h3></div>
+        <p>Belts awarded. Prizes bestowed — gold <span class="kanji" style="color:var(--red)">金</span>, silver <span class="kanji" style="color:var(--red)">銀</span>, bronze <span class="kanji" style="color:var(--red)">銅</span>. SHOGUN is crowned. Honour is written to the record and waits for next week.</p>
+        <div class="podium">
+          <div class="pod"><span class="medal" style="--td:.5s">銀</span><div class="ava" data-k="4" style="width:44px;height:44px"></div><div class="plinth" style="height:52px">二</div><span class="pn">Mara</span></div>
+          <div class="pod"><span class="medal" style="--td:.2s">金</span><div class="ava" data-k="9" style="width:52px;height:52px;box-shadow:inset 0 0 0 2px var(--gold)"></div><div class="plinth" style="height:80px">一</div><span class="pn">Dev · Shogun</span></div>
+          <div class="pod"><span class="medal" style="--td:.8s">銅</span><div class="ava" data-k="1" style="width:44px;height:44px"></div><div class="plinth" style="height:36px">三</div><span class="pn">Kenji</span></div>
+        </div>
+      </div>
+
+      <div class="roll-cap bot"></div>
+    </div>
+  </div>
+
+  <section class="enso-cta rv-sec">
+    <svg class="ring" viewBox="0 0 200 200" aria-hidden="true">
+      <circle class="ea" cx="100" cy="100" r="78" transform="rotate(-75 100 100)" stroke-width="9"/>
+      <circle class="eb" cx="100" cy="101" r="75" transform="rotate(-40 100 100)" stroke-width="3.5"/>
+    </svg>
+    <h2 class="rv">ARE YOU A SOCIAL SAMURAI?</h2>
+    <p class="sub rv d1">You know the forms now. Time to enter.</p>
+    <a class="btn rv d2" href="https://social-samurai.netlify.app" target="_blank" rel="noopener">Enter the Dojo <span class="seal">侍</span></a>
+    <p class="fine rv d3">Your move, Sensei.</p>
+  </section>
+</section>
+
+<!-- ================================================================ PREMIUM -->
+<section class="page" data-page="premium">
+  <div class="prem-hero">
+    <p class="kicker">Choose your path</p>
+    <h1 class="h-xl" style="font-size:clamp(24px,4.6vw,48px)">EVERY SAMURAI STARTS AS A STUDENT.</h1>
+    <p class="sub" style="margin:22px auto 0">Free covers your first dojo end to end. Premium keeps the honour flowing all year.</p>
+    <div class="founding rv-sec rv in">
+      <span class="kanji">免</span>
+      <p><b>FOUNDING DOJO — first 90 days:</b> $39/mo locked for life, plus a Founding Dojo badge on your ceremony. Then the standard $49.</p>
+    </div>
+  </div>
+
+  <section class="blk" style="background:var(--stage);padding-top:30px">
+    <div class="wrap">
+      <div class="paths">
+        <div class="path rv-sec rv in">
+          <span class="p-kanji">弟子</span>
+          <h3>Student · Free</h3>
+          <div class="price">$0<small> — the white belt</small></div>
+          <p class="annual">Your first full game night, end to end.</p>
+          <ul>
+            <li><b>3 games a month</b>, up to 8 samurai</li>
+            <li>Starter bank — 25 work-approved prompts</li>
+            <li>Belts &amp; full prize ceremony included</li>
+            <li>Single-session honour (stats reset at dawn)</li>
+            <li>1 host</li>
+          </ul>
+          <a class="btn ghost" href="https://social-samurai.netlify.app" target="_blank" rel="noopener">Start Free</a>
+        </div>
+        <div class="path sensei rv-sec rv in">
+          <span class="license-seal">免許皆伝</span>
+          <span class="p-kanji">先生</span>
+          <h3>Sensei · Premium</h3>
+          <div class="price">$49<small>/mo per dojo</small></div>
+          <p class="annual">$470/yr — two months free. Up to 15 players per game.</p>
+          <ul>
+            <li><b>Unlimited games</b>, up to 15 samurai per dojo</li>
+            <li>The full <b>100+ prompt bank</b> + fresh drops + <b>custom prompts</b></li>
+            <li><b>Persistent belts, ranks &amp; stats</b> across every session</li>
+            <li>Custom prize ceremony — names, awards, your branding</li>
+            <li>3 admin seats · session recaps to Slack &amp; email</li>
+            <li>Priority support</li>
+          </ul>
+          <a class="btn gold" href="https://social-samurai.netlify.app" target="_blank" rel="noopener">Become the Sensei</a>
+        </div>
+      </div>
+      <p class="value-line rv-sec rv in">One hosted team event costs <b>~$500</b>.<br>Your dojo: <b>$49 a month</b> — every week, forever. Less than one pizza lunch.</p>
+      <p class="guarantee">30-day money-back · if your team doesn&rsquo;t laugh, full refund</p>
+
+      <div class="hr-strip rv-sec">
+        <div class="hr-cell rv"><b>Safe by design</b>All 100 prompts are work-approved — no politics, no religion, no embarrassment.</div>
+        <div class="hr-cell rv d1"><b>Zero new tooling</b>Runs inside the meeting you already have. The Stage is a browser tab.</div>
+        <div class="hr-cell rv d2"><b>One license, whole team</b>One host license covers the dojo. Players never pay, never sign up.</div>
+      </div>
+
+      <div class="faq rv-sec">
+        <h2 class="h-md rv" style="text-align:center">QUESTIONS, ANSWERED</h2>
+        <details class="rv d1"><summary>How many people can play?</summary><div class="fa">A dojo holds 5–15 samurai per game. That&rsquo;s the sweet spot where guessing stays hard and the Unfurling stays fun. Bigger org? Run parallel dojos.</div></details>
+        <details class="rv d2"><summary>Does it work in Google Meet? Zoom? Teams?</summary><div class="fa">Yes, all three. The host shares the Dojo Stage as a tab — with tab audio for the dojo music, if you like. Players answer on their own phones, so nothing about your call changes.</div></details>
+        <details class="rv d3"><summary>Is it really safe for work?</summary><div class="fa">Every prompt was stress-tested against a cast of personas and screened for politics, religion, and anything embarrassing. Questions surface stories — &ldquo;your first job&rdquo;, &ldquo;a skill that never comes up at work&rdquo; — never secrets. The host can also reroll any question live.</div></details>
+        <details class="rv d4"><summary>Do players need accounts?</summary><div class="fa">No. Players type a dojo code and their name. Ten seconds, any phone or laptop. Only the host has an account.</div></details>
+        <details class="rv d5"><summary>What are the prizes?</summary><div class="fa">Whatever you set. The ceremony ships with gold 金, silver 銀, and bronze 銅 slots — default suggestions like &ldquo;$60 on Amazon&rdquo; or &ldquo;any drink you like, delivered today&rdquo;. Premium lets you customize every award.</div></details>
+      </div>
+    </div>
+  </section>
+
+  <section class="enso-cta rv-sec">
+    <svg class="ring" viewBox="0 0 200 200" aria-hidden="true">
+      <circle class="ea" cx="100" cy="100" r="78" transform="rotate(-75 100 100)" stroke-width="9"/>
+      <circle class="eb" cx="100" cy="101" r="75" transform="rotate(-40 100 100)" stroke-width="3.5"/>
+    </svg>
+    <h2 class="rv">ARE YOU A SOCIAL SAMURAI?</h2>
+    <p class="sub rv d1">Start free. Upgrade when the belts need to survive the week.</p>
+    <a class="btn rv d2" href="https://social-samurai.netlify.app" target="_blank" rel="noopener">Find Out — Free <span class="seal">侍</span></a>
+  </section>
+</section>
+
+</main>
+
+<footer>
+  <svg class="torn" viewBox="0 0 1200 16" preserveAspectRatio="none" aria-hidden="true">
+    <path d="M0 0 L60 9 L140 3 L230 12 L320 5 L410 11 L500 2 L590 10 L680 4 L770 12 L860 6 L950 11 L1040 3 L1130 9 L1200 4 L1200 0 Z" fill="currentColor"/>
+  </svg>
+  <div class="foot-big">
+    <h2>ARE YOU A SOCIAL SAMURAI?</h2>
+    <a class="btn" href="https://social-samurai.netlify.app" target="_blank" rel="noopener">Find Out — Free</a>
+  </div>
+  <div class="foot-cols">
+    <div>
+      <h4>Product</h4>
+      <a href="#/how">How It Works</a>
+      <a href="#/premium">Premium</a>
+      <a href="https://social-samurai.netlify.app" target="_blank" rel="noopener">Try Free</a>
+    </div>
+    <div>
+      <h4>Dojo Rules</h4>
+      <p>100 prompts, zero regrets.</p>
+      <p>All questions work-approved — no politics, no religion, no embarrassment.</p>
+    </div>
+    <div>
+      <h4>Contact</h4>
+      <p>dojo@socialsamurai.club</p>
+      <p>5–15 players · Meet, Zoom &amp; Teams</p>
+    </div>
+  </div>
+  <div class="foot-base">
+    <svg viewBox="0 0 200 200" style="width:20px;height:20px"><circle cx="100" cy="100" r="78" transform="rotate(-75 100 100)" style="fill:none;stroke:#a8232a;stroke-width:14;stroke-linecap:round;stroke-dasharray:430 490"/></svg>
+    <span>© Social Samurai · Forged in ink · Synced in realtime</span>
+  </div>
+  <div class="belt-strip">
+    <i style="background:var(--b-white)"></i><i style="background:var(--b-yellow)"></i><i style="background:var(--b-orange)"></i>
+    <i style="background:var(--b-green)"></i><i style="background:var(--b-blue)"></i><i style="background:var(--b-brown)"></i>
+    <i style="background:var(--b-black)"></i>
+  </div>
+</footer>
+
+<script>
+(() => {
+'use strict';
+
+/* ---------- kamon crest avatars (ported from the product) ---------- */
+const GRADS=[['#5c6672','#2e3540'],['#6d5f4c','#3a3226'],['#715454','#3a2a2a'],['#566253','#2b332a'],
+  ['#5f5670','#302b3a'],['#6e6754','#37332a'],['#52646a','#293336'],['#6a5560','#352a30'],
+  ['#4f5b64','#272f36'],['#63594a','#332d24'],['#6b5057','#332529'],['#4d5a4b','#262d25'],
+  ['#585070','#2b2738'],['#665f4f','#312e27'],['#4a5c60','#232d30']];
+function kamon(idx,c){
+  const k=((idx%15)+15)%15;
+  const pt=(r,a)=>[(50+r*Math.cos((a-90)*Math.PI/180)).toFixed(1),(50+r*Math.sin((a-90)*Math.PI/180)).toFixed(1)];
+  const dots=(n,rad,rr,rot=0)=>Array.from({length:n},(_,j)=>{const[x,y]=pt(rad,j*360/n+rot);return `<circle cx="${x}" cy="${y}" r="${rr}" fill="${c}"/>`;}).join('');
+  const spokes=(n,r1,r2,w,rot=0)=>Array.from({length:n},(_,j)=>{const[x1,y1]=pt(r1,j*360/n+rot),[x2,y2]=pt(r2,j*360/n+rot);
+    return `<line x1="${x1}" y1="${y1}" x2="${x2}" y2="${y2}" stroke="${c}" stroke-width="${w}" stroke-linecap="round"/>`;}).join('');
+  const poly=(n,r,rot=0,sw=0)=>{const p=Array.from({length:n},(_,j)=>pt(r,j*360/n+rot).join(',')).join(' ');
+    return `<polygon points="${p}" fill="${sw?'none':c}" ${sw?`stroke="${c}" stroke-width="${sw}"`:''}/>`;};
+  const ring=(r,w)=>`<circle cx="50" cy="50" r="${r}" fill="none" stroke="${c}" stroke-width="${w}"/>`;
+  let b='';
+  switch(k){
+    case 0:b=dots(5,24,15)+`<circle cx="50" cy="50" r="10" fill="${c}"/>`;break;
+    case 1:b=spokes(16,15,44,4)+`<circle cx="50" cy="50" r="10" fill="${c}"/>`;break;
+    case 2:b=dots(3,21,18);break;
+    case 3:b=ring(42,5)+ring(27,5)+`<circle cx="50" cy="50" r="12" fill="${c}"/>`;break;
+    case 4:b=poly(4,42,0,6)+poly(4,20);break;
+    case 5:b=poly(6,42,0,6)+poly(6,20);break;
+    case 6:b=spokes(2,-40,40,7,45)+dots(2,40,9,45)+spokes(2,-40,40,7,135)+dots(2,40,9,135);break;
+    case 7:b=[-22,0,22].map(x=>`<rect x="${46+x}" y="14" width="8" height="72" rx="4" fill="${c}"/>`).join('')+[-22,0,22].map(x=>`<rect x="${43+x}" y="44" width="14" height="6" rx="3" fill="${c}"/>`).join('');break;
+    case 8:b=[16,30,44].map(r=>`<path d="M ${50-r} 58 q ${r/2} -26 ${r} 0" fill="none" stroke="${c}" stroke-width="6" stroke-linecap="round"/>`).join('');break;
+    case 9:b=spokes(8,10,44,8);break;
+    case 10:b=[0,1].map(j=>`<path d="M 16 ${58+j*18} L 50 ${30+j*18} L 84 ${58+j*18}" fill="none" stroke="${c}" stroke-width="7" stroke-linejoin="round" stroke-linecap="round"/>`).join('');break;
+    case 11:b=spokes(2,-42,42,7,45)+spokes(2,-42,42,7,135)+poly(4,15);break;
+    case 12:b=Array.from({length:4},(_,j)=>`<rect x="52" y="24" width="24" height="24" rx="3" fill="${c}" transform="rotate(${j*90} 50 50)"/>`).join('');break;
+    case 13:b=Array.from({length:3},(_,j)=>`<ellipse cx="50" cy="26" rx="11" ry="20" fill="${c}" transform="rotate(${j*120} 50 50)"/>`).join('');break;
+    default:b=Array.from({length:3},(_,j)=>{const[x,y]=pt(17,j*120);return `<circle cx="${x}" cy="${y}" r="24" fill="none" stroke="${c}" stroke-width="5"/>`;}).join('');
+  }
+  return `<svg class="km" viewBox="0 0 100 100" aria-hidden="true">${b}</svg>`;
+}
+function paintAva(el){
+  const k=Number(el.dataset.k)||0;
+  const g=GRADS[((k%15)+15)%15];
+  el.style.background=`linear-gradient(145deg,${g[0]},${g[1]})`;
+  if(!el.style.boxShadow) el.style.boxShadow='inset 0 0 0 2px rgba(237,228,211,.22)';
+  el.innerHTML=kamon(k,'#f2e9d8');
+}
+document.querySelectorAll('.ava[data-k],.sm-ava[data-k]').forEach(paintAva);
+
+/* ---------- cold grid tiles ---------- */
+const G9=document.getElementById('grid9');
+const NAMES=['Kenji','Mara','Dev','Priya','Sol','Ana','Theo','June','Rafa'];
+G9.innerHTML=NAMES.map((n,i)=>`
+  <div class="tile" style="--td:${(i*0.28+0.3).toFixed(2)}s">
+    <div class="t-real"><div class="ava breathe" data-k="${i}" style="width:40px;height:40px"></div><span class="nm">${n}</span></div>
+    <div class="t-ghost-t"></div><div class="t-ghost-b"></div>
+    <div class="t-slash"></div>
+  </div>`).join('');
+G9.querySelectorAll('.ava[data-k]').forEach(paintAva);
+
+/* ---------- router ---------- */
+function route(){
+  const h=location.hash;
+  const key=h.startsWith('#/how')?'how':h.startsWith('#/premium')?'premium':'home';
+  document.querySelectorAll('.page').forEach(p=>p.classList.toggle('active',p.dataset.page===key));
+  document.querySelectorAll('[data-nav]').forEach(a=>a.classList.toggle('on',a.dataset.nav===key));
+  window.scrollTo(0,0);
+}
+window.addEventListener('hashchange',route);
+route();
+
+/* ---------- reveal engine (scroll-driven; survives IO throttling) ---------- */
+const secs=[...document.querySelectorAll('.rv-sec')];
+const cz=document.getElementById('cutzone');
+const cutCard=cz?cz.querySelector('.cut-card'):null;
+function revealCheck(){
+  const vh=innerHeight;
+  secs.forEach(el=>{
+    if(!el.closest('.page')||el.closest('.page').classList.contains('active')||el.closest('footer')){
+      const r=el.getBoundingClientRect();
+      const on=r.top<vh*.78 && r.bottom>vh*.12;
+      if(on!==el.classList.contains('in')){
+        el.classList.toggle('in',on);
+        el.querySelectorAll('.rv').forEach(c=>c.classList.toggle('in',on));
+      }
+    }
+  });
+  if(cutCard){
+    const r=cutCard.getBoundingClientRect();
+    const on=r.top<vh*.62 && r.bottom>vh*.2;
+    if(on&&!cz.classList.contains('cut'))cz.classList.add('cut');
+    if(r.top>vh||r.bottom<0)cz.classList.remove('cut');
+  }
+}
+addEventListener('scroll',revealCheck,{passive:true});
+addEventListener('resize',revealCheck,{passive:true});
+setInterval(revealCheck,800);
+revealCheck();
+window.__ssReveal=revealCheck;
+
+/* ---------- nav CTA escalation ---------- */
+const navCta=document.getElementById('navCta');
+let esc=false;
+addEventListener('scroll',()=>{
+  const p=scrollY/(document.body.scrollHeight-innerHeight||1);
+  if(p>.6&&!esc){esc=true;navCta.innerHTML='Enter the Dojo <span class="seal">侍</span>';}
+  else if(p<.4&&esc){esc=false;navCta.innerHTML='Try Free <span class="seal">侍</span>';}
+},{passive:true});
+
+/* ---------- living leaderboard ---------- */
+const LBP=[{n:'Kenji',k:1,s:180},{n:'Mara',k:4,s:240},{n:'Dev',k:9,s:210},{n:'Sol',k:12,s:120},{n:'Ana',k:6,s:150}];
+const QS=['“What was the very first job you ever did, paid or not?”',
+  '“Name a skill you have that would never come up at work.”',
+  '“Who would win a game before anyone finished explaining the rules?”',
+  '“Your go-to karaoke song — even if you’d never actually sing it.”',
+  '“Who would remember your name and one detail after meeting you once?”'];
+const lbRows=document.getElementById('lbRows'),lbQ=document.getElementById('lbQ'),lbX2=document.getElementById('lbX2');
+if(lbRows){
+  lbRows.innerHTML=LBP.map((p,i)=>`
+    <div class="lb-row" data-i="${i}">
+      <div class="ava" data-k="${p.k}" style="width:30px;height:30px"></div>
+      <span class="nm">${p.n}</span><span class="gain"></span>
+      <span class="pts">${p.s}</span>
+    </div>`).join('');
+  lbRows.querySelectorAll('.ava').forEach(paintAva);
+  const rows=[...lbRows.querySelectorAll('.lb-row')];
+  function layout(){
+    const order=LBP.map((p,i)=>({i,s:p.s})).sort((a,b)=>b.s-a.s);
+    order.forEach((o,rank)=>{
+      const el=rows[o.i];
+      el.style.top=(rank*46)+'px';
+      el.classList.toggle('first',rank===0);
+    });
+  }
+  layout();
+  let beat=0,qi=0;
+  const GAINS=[['+100 STRIKE',100],['+50 GAUNTLET',50],['+25 PERFECT FORM',25],['+100 COUNCIL',100]];
+  setInterval(()=>{
+    if(!lbRows.closest('.rv-sec').classList.contains('in'))return;
+    beat++;
+    const x2=beat%6===0;
+    if(x2){lbX2.classList.add('on');setTimeout(()=>lbX2.classList.remove('on'),1200);}
+    const who=Math.floor(Math.random()*LBP.length);
+    const g=GAINS[Math.floor(Math.random()*GAINS.length)];
+    const amt=g[1]*(x2?2:1);
+    LBP[who].s+=amt;
+    const el=rows[who],gainEl=el.querySelector('.gain');
+    gainEl.textContent=(x2?'×2 ':'')+g[0];
+    gainEl.classList.remove('show');void gainEl.offsetWidth;gainEl.classList.add('show');
+    el.querySelector('.pts').textContent=LBP[who].s;
+    layout();
+    if(beat%3===0){qi=(qi+1)%QS.length;lbQ.classList.add('swap');
+      setTimeout(()=>{lbQ.textContent=QS[qi];lbQ.classList.remove('swap');},400);}
+    if(Math.max(...LBP.map(p=>p.s))>1400){LBP.forEach((p,i)=>{p.s=100+Math.floor(Math.random()*160);rows[i].querySelector('.pts').textContent=p.s;});layout();}
+  },2600);
+}
+})();
+</script>
