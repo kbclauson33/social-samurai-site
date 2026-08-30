@@ -34,10 +34,20 @@ different domain is chosen, search-and-replace across `index.html`,
 
 ## 2. Site — what's built and what's next
 
-**Built (v1, this repo):** static, no build step — same philosophy as the game.
-- `index.html` — landing page: hero, how-it-works, features, pricing ladder, agency comparison, FAQ, footer.
+**Built (v2, this repo):** static, no build step — same philosophy as the game.
+- `index.html` — landing page: live self-playing game demo in the hero (stage +
+  phone controller, screens mirrored from the playtested client), Google Meet
+  dual-control section ("Play dual control: play from your phone, see it on the
+  Google Meet"), Free/Event/Premium plans, FAQ, login dialog.
+- `premium.html` — premium page: 9 premium features, Team/Company/Enterprise
+  tiers, Free-vs-Premium comparison matrix.
 - `privacy.html`, `terms.html` — full drafts (marked draft, counsel review before first sale).
-- Menus: How it works · Pricing · For companies · FAQ, plus footer legal links.
+- Menus: How it works · Dual control · Premium · FAQ · Log in · Book a Night.
+- CTA structure: **Try for Free is the primary CTA** (free tier: 8 players,
+  starter pack — the free game IS the pitch); Book a Night $299 is secondary.
+  `PLAY_URL` in index.html points at the hosted free game when it ships;
+  empty → access-request dialog. Login is a dialog until accounts ship
+  (magic-link sign-in, matching the admin console design in the game repo).
 
 **Positioning on the page** (from the Aug 26 commercial teardown): sell against
 the $320 hosted agency session — "$299 tonight, and nobody has to schedule a stranger."

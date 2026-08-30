@@ -14,9 +14,21 @@ python3 -m http.server 8000
 
 ## Where things live
 
-- `index.html` — the whole landing page (styles + purchase logic inline)
+- `index.html` — landing page: live self-playing game demo (hero), Meet
+  dual-control mock, plans, FAQ, login + buy dialogs. All inline.
+- `premium.html` — premium features, paid tiers, comparison matrix.
+  Its `TIERS` object must stay in sync with index.html's.
 - `privacy.html`, `terms.html` — legal drafts (marked Draft until counsel pass)
 - `docs/PLAN.md` — domain decision, billing plan, legal checklist, launch checklist
+
+## The hero demo
+
+The animation is a scripted replay of the real game loop (screens from the
+playtested client): roster join → secret typed on stage → phone picks & locks →
+flip reveal with streak → concealment bonus. It pauses off-screen, resets
+scores each loop, and respects prefers-reduced-motion. When the v4 zip is
+recovered, swap sample facts/names for real game footage or keep as-is.
+`PLAY_URL` (index.html) routes "Try for Free" to the hosted free game when live.
 
 ## Decisions and constraints
 
