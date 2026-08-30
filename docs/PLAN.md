@@ -42,9 +42,9 @@ different domain is chosen, search-and-replace across `index.html`,
 - `premium.html` — premium page: 9 premium features, Team/Company/Enterprise
   tiers, Free-vs-Premium comparison matrix.
 - `privacy.html`, `terms.html` — full drafts (marked draft, counsel review before first sale).
-- Menus: How it works · Dual control · Premium · FAQ · Log in · Book a Night.
+- Menus: How it works · Dual control · Premium · FAQ · Log in · Host a Game Night.
 - CTA structure: **Try for Free is the primary CTA** (free tier: 8 players,
-  starter pack — the free game IS the pitch); Book a Night $299 is secondary.
+  starter pack — the free game IS the pitch); Host a Game Night $299 is secondary.
   `PLAY_URL` in index.html points at the hosted free game when it ships;
   empty → access-request dialog. Login is a dialog until accounts ship
   (magic-link sign-in, matching the admin console design in the game repo).

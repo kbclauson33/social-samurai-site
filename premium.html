@@ -201,7 +201,7 @@
       <a href="index.html#how">How it works</a>
       <a href="index.html#dual">Dual control</a>
       <a href="index.html#faq">FAQ</a>
-      <button class="nav-cta" data-buy="event" type="button">Book a Night</button>
+      <button class="nav-cta" data-buy="event" type="button">Host a Game Night</button>
     </div>
   </div>
 </nav>
@@ -331,7 +331,7 @@
         <button class="btn btn-ghost" data-buy="enterprise" type="button">Talk to us</button>
       </div>
     </div>
-    <p class="price-note">Prices in USD. Annual plans renew automatically and cancel anytime before renewal. Need one great night, not a subscription? <a href="index.html#pricing" style="color:var(--seal)">Book a Night for $299</a>.</p>
+    <p class="price-note">Prices in USD. Annual plans renew automatically and cancel anytime before renewal. Need one great night, not a subscription? <a href="index.html#pricing" style="color:var(--seal)">Host a Game Night for $299</a>.</p>
   </div>
 </section>
 
@@ -371,7 +371,7 @@
     <p class="measure rv d1" style="margin:0 auto 30px">The free game is the pitch. Run one night with eight people — if Monday isn't louder than usual, don't upgrade.</p>
     <div class="rv d2" style="display:flex;gap:14px;justify-content:center;flex-wrap:wrap">
       <a class="btn btn-seal" href="index.html#top">Try for Free</a>
-      <button class="btn btn-ghost" data-buy="event" type="button">Book a Night — $299</button>
+      <button class="btn btn-ghost" data-buy="event" type="button">Host a Game Night — $299</button>
     </div>
   </div>
 </section>
@@ -389,7 +389,7 @@
 
 <dialog id="buy">
   <div class="dlg-in">
-    <h3 id="buy-title">Book a Night</h3>
+    <h3 id="buy-title">Host a Game Night</h3>
     <p class="tierline" id="buy-tier">SINGLE EVENT · $299</p>
     <p id="buy-copy"></p>
     <div class="row">
@@ -403,7 +403,7 @@
 /* Same purchasing logic as index.html — paste Stripe Payment Links here too,
    or better: keep both files' TIERS in sync (docs/PLAN.md §3). */
 const TIERS = {
-  event:      { name: "Book a Night", line: "SINGLE EVENT · $299 · ONE NIGHT",  link: "" },
+  event:      { name: "Host a Game Night", line: "SINGLE EVENT · $299 · ONE NIGHT",  link: "" },
   team:       { name: "Team",         line: "TEAM · $900 / YEAR",               link: "" },
   company:    { name: "Company",      line: "COMPANY · $4,800 / YEAR",          link: "" },
   enterprise: { name: "Enterprise",   line: "ENTERPRISE · FROM $15,000 / YEAR", link: null }
@@ -418,7 +418,7 @@ document.querySelectorAll("[data-buy]").forEach(btn => {
     document.getElementById("buy-tier").textContent = t.line;
     document.getElementById("buy-copy").textContent = t.link === null
       ? "Enterprise plans come with SSO, a DPA, and a security review. Tell us about your org and we'll come back within one business day."
-      : "Checkout opens shortly — we're finishing payment setup. Email us now and you'll get the booking link the moment it's live, with founding-customer pricing locked in.";
+      : "Checkout opens shortly — we're finishing payment setup. Email us now and you'll get the checkout link the moment it's live, with founding-customer pricing locked in.";
     const subject = encodeURIComponent("Social Samurai — " + t.name);
     const body = encodeURIComponent("Hi — I'm interested in Social Samurai (" + t.name + ").\n\nCompany:\nTeam size:\n");
     document.getElementById("buy-mail").href = "mailto:" + CONTACT + "?subject=" + subject + "&body=" + body;

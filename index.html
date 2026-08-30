@@ -4,7 +4,7 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1">
 <title>Social Samurai</title>
-<meta name="description" content="Social Samurai is a live game night for work teams — phones are the controllers, the big screen is the stage. Try it free, or book a night for $299.">
+<meta name="description" content="Social Samurai is a live game night for work teams — phones are the controllers, the big screen is the stage. Try it free, or host a game night for $299.">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Shippori+Mincho:wght@500;600;700;800&family=IBM+Plex+Sans:wght@400;500;600;700&family=IBM+Plex+Mono:wght@400;500;600&display=swap">
@@ -497,7 +497,7 @@
       <a href="premium.html">Premium</a>
       <a href="#faq">FAQ</a>
       <button class="linkish" id="loginBtn" type="button">Log in</button>
-      <button class="nav-cta" data-buy="event" type="button">Book a Night</button>
+      <button class="nav-cta" data-buy="event" type="button">Host a Game Night</button>
     </div>
   </div>
 </nav>
@@ -511,7 +511,7 @@
       <p class="standfirst">Everyone's phone becomes a controller. The big screen becomes a stage. Seven rounds of writing, bluffing, and guessing who-wrote-what — and nobody gets to sit out.</p>
       <div class="cta-row">
         <button class="btn btn-seal" data-play type="button">Try for Free</button>
-        <button class="btn btn-ghost" data-buy="event" type="button">Book a Night — $299</button>
+        <button class="btn btn-ghost" data-buy="event" type="button">Host a Game Night — $299</button>
         <span class="cta-note">No app to install. Works on any phone browser and any screen you can cast or share.</span>
       </div>
     </div>
@@ -666,7 +666,7 @@
 <section id="pricing">
   <div class="wrap">
     <span class="sec-label rv">Plans</span>
-    <h2 class="rv">Start free. Book a Night when it counts.</h2>
+    <h2 class="rv">Start free. Host a Game Night when it counts.</h2>
     <p class="measure rv d1">A hosted team-building session runs about $320 and books weeks out. Social Samurai is free to try this afternoon — and yours all year on <a href="premium.html" style="color:var(--seal)">Premium</a>.</p>
 
     <div class="tiers">
@@ -695,7 +695,7 @@
           <li>Live-night support on call</li>
           <li>Refunded if tech fails the night</li>
         </ul>
-        <button class="btn btn-seal" data-buy="event" type="button">Book a Night</button>
+        <button class="btn btn-seal" data-buy="event" type="button">Host a Game Night</button>
       </div>
 
       <div class="tier rv d2">
@@ -753,10 +753,10 @@
   <div class="wrap">
     <div class="seal-stamp" aria-hidden="true">侍</div>
     <h2 class="rv">Thursday is coming.</h2>
-    <p class="rv d1">Try it free with your team today — or Book a Night and make it an event.</p>
+    <p class="rv d1">Try it free with your team today — or Host a Game Night and make it an event.</p>
     <div class="cta-row rv d2" style="justify-content:center">
       <button class="btn btn-seal" data-play type="button">Try for Free</button>
-      <button class="btn btn-ghost" data-buy="event" type="button">Book a Night — $299</button>
+      <button class="btn btn-ghost" data-buy="event" type="button">Host a Game Night — $299</button>
     </div>
   </div>
 </section>
@@ -774,11 +774,11 @@
 
 <dialog id="buy">
   <div class="dlg-in">
-    <h3 id="buy-title">Book a Night</h3>
+    <h3 id="buy-title">Host a Game Night</h3>
     <p class="tierline" id="buy-tier">SINGLE EVENT · $299</p>
     <p id="buy-copy"></p>
     <div class="row">
-      <a class="btn btn-seal" id="buy-mail" href="#">Email us to book</a>
+      <a class="btn btn-seal" id="buy-mail" href="#">Email us to set it up</a>
       <button class="dlg-close" id="buy-close" type="button">Close</button>
     </div>
   </div>
@@ -806,7 +806,7 @@
    ============================================================ */
 const PLAY_URL = "";
 const TIERS = {
-  event:   { name: "Book a Night",  line: "SINGLE EVENT · $299 · ONE NIGHT", link: "" },
+  event:   { name: "Host a Game Night",  line: "SINGLE EVENT · $299 · ONE NIGHT", link: "" },
   team:    { name: "Team",          line: "TEAM · $900 / YEAR",              link: "" },
   company: { name: "Company",       line: "COMPANY · $4,800 / YEAR",         link: "" }
 };
@@ -819,11 +819,11 @@ document.querySelectorAll("[data-buy]").forEach(btn => {
     if (t.link) { window.location.href = t.link; return; }
     document.getElementById("buy-title").textContent = t.name;
     document.getElementById("buy-tier").textContent = t.line;
-    document.getElementById("buy-mail").textContent = "Email us to book";
+    document.getElementById("buy-mail").textContent = "Email us to set it up";
     document.getElementById("buy-copy").textContent =
-      "Checkout opens shortly — we're finishing payment setup. Email us now and you'll get the booking link the moment it's live, with founding-customer pricing locked in.";
+      "Checkout opens shortly — we're finishing payment setup. Email us now and you'll get the checkout link the moment it's live, with founding-customer pricing locked in.";
     const subject = encodeURIComponent("Social Samurai — " + t.name);
-    const body = encodeURIComponent("Hi — I'd like to book Social Samurai (" + t.name + ").\n\nCompany:\nTeam size:\nTarget date:\n");
+    const body = encodeURIComponent("Hi — I'd like to host a Social Samurai game night (" + t.name + ").\n\nCompany:\nTeam size:\nTarget date:\n");
     document.getElementById("buy-mail").href = "mailto:" + CONTACT + "?subject=" + subject + "&body=" + body;
     buyDlg.showModal();
   });
