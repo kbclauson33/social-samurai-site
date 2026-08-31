@@ -34,20 +34,26 @@ different domain is chosen, search-and-replace across `index.html`,
 
 ## 2. Site — what's built and what's next
 
-**Built (v2, this repo):** static, no build step — same philosophy as the game.
-- `index.html` — landing page: live self-playing game demo in the hero (stage +
-  phone controller, screens mirrored from the playtested client), Google Meet
-  dual-control section ("Play dual control: play from your phone, see it on the
-  Google Meet"), Free/Event/Premium plans, FAQ, login dialog.
-- `premium.html` — premium page: 9 premium features, Team/Company/Enterprise
-  tiers, Free-vs-Premium comparison matrix.
-- `privacy.html`, `terms.html` — full drafts (marked draft, counsel review before first sale).
-- Menus: How it works · Dual control · Premium · FAQ · Log in · Host a Game Night.
-- CTA structure: **Try for Free is the primary CTA** (free tier: 8 players,
-  starter pack — the free game IS the pitch); Host a Game Night $299 is secondary.
-  `PLAY_URL` in index.html points at the hosted free game when it ships;
-  empty → access-request dialog. Login is a dialog until accounts ship
-  (magic-link sign-in, matching the admin console design in the game repo).
+**Built (v3, this repo):** static, no build step — same philosophy as the game.
+
+The v4 game client was recovered on 2026-08-31 (from the live Netlify
+deployment, into `social-samurai/web/game`). **The site's design system is now
+copied verbatim from the game** — see the site's `CLAUDE.md`. Do not invent a
+separate visual language.
+
+- `index.html` — ensō hero + wordmark; a live stage replaying real phases
+  (lobby → Scroll → Strike → Honour Struck → Council → standings) with a phone
+  controller; "How a night unfolds" (5 beats, using the game's own `fighter()`
+  and `senseiFigure()` art, plus the 金銀銅 podium); "The bank" (real prompts
+  from `questions.js`); Google Meet dual control; the two round types; honour
+  scoring; plans; FAQ; sign-in dialog.
+- `premium.html` — 9 premium features in game vocabulary, Team/Company/
+  Enterprise tiers, Free-vs-Premium matrix.
+- `privacy.html`, `terms.html` — drafts (counsel review before first sale).
+- Menus: The Game · A Night · Dual Control · Premium · Questions · Enter a Dojo · Try for Free.
+- CTA structure: **Try for Free is primary** (free dojo: 8 samurai, starter
+  prompts); Host a Game Night $299 secondary. Never "Book a Night" — reads like
+  a hotel. `PLAY_URL` in index.html routes to the hosted free dojo when it ships.
 
 **Positioning on the page** (from the Aug 26 commercial teardown): sell against
 the $320 hosted agency session — "$299 tonight, and nobody has to schedule a stranger."
@@ -56,8 +62,9 @@ $4,800 Company (highlighted) / $15k+ Enterprise.
 
 **Next content upgrades (in order of impact):**
 1. Three customer logos + one verbatim quote from a game night (teardown Q13/Q15).
-2. 20–30s screen recording of the intro sequence + a reveal round in the hero.
-3. A free sample of 10 questions as a lead magnet (content route B from the teardown).
+2. A real screen recording of the intro sequence and a reveal, to sit beside or
+   replace the scripted stage animation.
+3. A free sample of 10 prompts as a lead magnet (content route B from the teardown).
 
 ## 3. Billing — how we take money
 
