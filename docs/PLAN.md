@@ -110,15 +110,41 @@ plans cancel anytime, run to end of year.
 
 ## 5. Hosting
 
-Static files → GitHub Pages (free, this repo, custom domain + HTTPS) or
-Cloudflare Pages. Recommendation: **GitHub Pages** — Kaben's flow is
-GitHub-first and there's no build step. DNS: point the GoDaddy A/CNAME records
-at Pages, flip on HTTPS. 10 minutes.
+**Live now** on GitHub Pages (main branch, root), HTTPS enforced:
+<https://kbclauson33.github.io/social-samurai-site/>
+
+All four pages verified live (index, premium, privacy, terms). Internal links
+are all **relative** (`privacy.html`, not `/privacy.html`), so they work both on
+the current `/social-samurai-site/` subpath and on a future apex domain — keep
+them relative.
+
+**The repo is public.** Free GitHub Pages requires it; a private repo returns
+HTTP 422 "your current plan does not support GitHub Pages". Don't flip it back
+to private without moving hosting to Cloudflare Pages first.
+
+### Custom domain — on hold, price
+
+`socialsamurai.io` is still available but GoDaddy's real checkout price is
+**$179.99 for 3 years, auto-renewing at $269.97/3yr** — Kaben paused the
+purchase on 2026-08-30 as too expensive. Cheaper options from §1 still open:
+`playsocialsamurai.com` ($45.99/3yr), `socialsamurai.co` ($119.99/3yr),
+`socialsamurai.games` ($9.99 first yr but $51.99 renewal). Worth comparing
+Cloudflare Registrar or Namecheap for .io before rebuying at GoDaddy.
+
+When a domain is settled, the DNS step is:
+1. GoDaddy → My Products → the domain → DNS → Manage DNS.
+2. Four **A** records, host `@`: `185.199.108.153`, `185.199.109.153`,
+   `185.199.110.153`, `185.199.111.153`.
+3. One **CNAME**, host `www` → `kbclauson33.github.io`.
+4. Repo → Settings → Pages → Custom domain → enter the apex domain → Save
+   (this commits a `CNAME` file to the repo root).
+5. Wait for the DNS check to pass, then tick **Enforce HTTPS**.
 
 ## 6. Launch checklist
 
-- [ ] Buy domain (§1) — **the one blocking decision**
-- [ ] Enable GitHub Pages on this repo + connect domain
+- [ ] Buy domain (§1) — **the one blocking decision** (paused on price, see §5)
+- [x] Enable GitHub Pages on this repo — live, HTTPS on
+- [ ] Connect the custom domain once bought (DNS steps in §5)
 - [ ] Stripe account + 3 Payment Links pasted into `TIERS` (§3)
 - [ ] Set up `hello@` mailbox (GoDaddy forward or Google Workspace) — buttons already point at it
 - [ ] IP ownership answer in writing (§4)
