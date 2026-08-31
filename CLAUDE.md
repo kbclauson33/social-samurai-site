@@ -21,14 +21,33 @@ python3 -m http.server 8000
 - `privacy.html`, `terms.html` — legal drafts (marked Draft until counsel pass)
 - `docs/PLAN.md` — domain decision, billing plan, legal checklist, launch checklist
 
-## The hero demo
+## The design system is the GAME's, not ours
 
-The animation is a scripted replay of the real game loop (screens from the
-playtested client): roster join → secret typed on stage → phone picks & locks →
-flip reveal with streak → concealment bonus. It pauses off-screen, resets
-scores each loop, and respects prefers-reduced-motion. When the v4 zip is
-recovered, swap sample facts/names for real game footage or keep as-is.
-`PLAY_URL` (index.html) routes "Try for Free" to the hosted free game when live.
+Every token, face and motif on this site is copied verbatim from
+`social-samurai/web/game/styles.css` and `app.js`. Do not invent a new visual
+language here — if the game changes, this site follows it.
+
+- Tokens: `--bg #141114`, `--stage #0f0c0e`, `--ink #ede4d3`, `--paper #e9dfcc`,
+  `--red #a8232a` (+ red-2/3/4), `--gold #e8c063`, belts array.
+- Faces: Palatino serif display (wide tracking), Hiragino Mincho for kanji
+  (Noto Serif JP webfont fallback), system sans for labels.
+- Motifs: the ensō drawn with the game's `#brush` feTurbulence filter, the
+  paper-grain `.ss-noise` overlay, giant faint kanji ghosts, 「corner brackets」
+  on codes, tiny wide-tracked uppercase micro-labels.
+- `kamon()` and the GRADS/BELTS arrays are **ported verbatim** from `app.js`, so
+  the crests here are the same crests the game draws. Re-copy rather than edit.
+- Committed dark. There is no light theme — the dojo has one light.
+
+Vocabulary is the game's: dojo, sensei, samurai, THE SCROLL 巻物 (Strike /
+Gauntlet / Unfurling), THE COUNCIL 評定 (Your Pick 心 / The Crowd 衆),
+HONOUR 誉, standings 名誉, belts, Shogun.
+
+## The hero stage
+
+A scripted replay of a real dojo using the real phases: lobby → scroll →
+strike → honour struck → council → standings. Prompts come from the game's
+`questions.js`. Pauses off-screen, resets scores each loop, reduced-motion safe.
+`PLAY_URL` (index.html) routes "Try for Free" to the hosted free dojo when live.
 
 ## Decisions and constraints
 
